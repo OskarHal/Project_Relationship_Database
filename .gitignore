@@ -1,0 +1,4 @@
+venv/
+.idea/
+almbic.ini
+app/db/db_settings/
