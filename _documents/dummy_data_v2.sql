@@ -120,7 +120,7 @@ VALUES
 INSERT INTO spareparts_stores
 (spareparts_SparepartId,
 stores_StoreId,
-Location,
+StockLocation,
 Quantity)
 VALUES
 (1, 1, 'A1', 45),
@@ -146,7 +146,4 @@ INSERT INTO carmodels_spareparts
 VALUES
 (1, 1),
 (2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6);
+(3, 3);
