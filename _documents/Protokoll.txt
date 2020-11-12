@@ -1,0 +1,15 @@
+Onsdag 11 November
+
+Har tillsammans gått igenom ER-diagram och kollar 
+igenom alla Sekundär Nycklar och går igenom CASCADE, SET NULL,RESTRICDED
+
+Skapar 'Dummy data för att testa i MySQL'
+
+Delar upp så att alla får göra några tabeller själva. 
+
+Tabeller som är kvar Order_Details, Carmodels_Spareparts, Spareparts_Stores
+
+Nästa stand-up Torsdag 12 November för att fortsätta jobba med 'Dummy data'.
+
+
+
