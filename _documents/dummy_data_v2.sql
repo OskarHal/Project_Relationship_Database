@@ -69,33 +69,33 @@ VALUES
 ('4234v2', 1, 1, 'Air filter', 'B0', 13, 5.99, 10.00, 10, 30, '2021-01-01');
 
 
-INSERT INTO `carparts1`.`company_customers` 
+INSERT INTO company_customers 
 (CustomerId, Name, ContactFirstName, ContactLastName, PhoneNr, Email)
 VALUES
 (2, 'Apple', 'Steve', 'Jobs', '123465789', 'apple@apple.com');
 
 
-INSERT INTO `carparts1`.`private_customers`
+INSERT INTO private_customers
 (CustomerId, FirstName, LastName, PhoneNr, Email )
 VALUES
 (1, 'Joakim', 'Wassberg', '98564321', 'jokkeboii@python.com');
 
 
-INSERT INTO `carparts1`.`customer_cars`
+INSERT INTO customer_cars
 (RegistrationNr, CustomerId, Brand, Model, ModelYear, Color)
 VALUES 
 ('ABC 123', 1, 'SAAB', '9-3', 2004, 'Silver-ish'),
 ('AAA 999', 2, 'VÖLVO', 'XC-800', 2035, 'grön');
 
 
-INSERT INTO `carparts1`.`company_contacts`
+INSERT INTO company_contacts
 (`Name`, `PhoneNr`, `Email`, `ManufacturerId`)
 VALUES
 ('Arvid', '0707-070707', 'Company@mail.com', 1),
 ('David', '0707-707070', 'Company2@mail.com', 2);
 
 
-INSERT INTO `carparts1`.`stores`
+INSERT INTO stores
 (Name, PhoneNr, Email, Adress)
 VALUES
 ('Gothenburg', '1258125','Gbg@mejl.com', 'Goteborgsvagen 23'),
@@ -104,7 +104,7 @@ VALUES
 ('Stockholm','12544646','Stockholm@mejl.com', 'Stockholmsvagen 23');
 
 
-INSERT INTO `carparts1`.`orders`
+INSERT INTO orders
 (CustomerId, EmployeeId, StoreId)
 VALUES
 (1, 1, 1),
