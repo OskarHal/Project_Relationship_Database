@@ -55,18 +55,16 @@ INSERT INTO spareparts
 `ManufacturerId`,
 `SupplierId`,
 `Description`,
-`StockLocation`,
-`QuantityInStock`,
 `PurchasePrice`,
 `SellingPrice`,
 `ReorderLevel`,
 `OrderQuantity`,
 `EstimatedTimeOfArrival`)
 VALUES
-('123', 1, 1, 'Testdata', 'A1', 20, 19.99, 25.99, 3, 10, '2020-11-11'),
-('23', 1, 1, 'horn', 'A2', 30, 8.55, 10.90, 10, 20, '2020-12-01'),
-('6858', 1, 1, 'tire', 'A1', 5, 55.90, 69.90, 20, 20, '2020-11-30'),
-('4234v2', 1, 1, 'Air filter', 'B0', 13, 5.99, 10.00, 10, 30, '2021-01-01');
+('123', 1, 1, 'Headlight', 19.99, 25.99, 3, 10, '2020-11-11'),
+('23', 1, 1, 'horn',8.55, 10.90, 10, 20, '2020-12-01'),
+('6858', 1, 1, 'tire', 55.90, 69.90, 20, 20, '2020-11-30'),
+('4234v2', 1, 1, 'Air filter', 5.99, 10.00, 10, 30, '2021-01-01');
 
 
 INSERT INTO company_customers 
@@ -111,3 +109,44 @@ VALUES
 (1, 2, 2),
 (2, 3, 3),
 (2, 5, 4);
+
+INSERT INTO order_details 
+(SparepartId, OrderId, Quantity)
+VALUES
+(1, 2, 5),
+(2, 3, 5),
+(3, 4, 6);
+
+INSERT INTO spareparts_stores
+(spareparts_SparepartId,
+stores_StoreId,
+Location,
+Quantity)
+VALUES
+(1, 1, 'A1', 45),
+(1, 2, 'A2', 30),
+(1, 3, 'A3', 15),
+(1, 4, 'A1', 10),
+(2, 1, 'B3', 6),
+(2, 2, 'C1', 19),
+(2, 3, 'A2', 7),
+(2, 4, 'A5', 8),
+(3, 1, 'A1', 30),
+(3, 2, 'A4', 27),
+(3, 3, 'C4', 19),
+(3, 4, 'D5', 11),
+(4, 1, 'A4', 7),
+(4, 2, 'B1', 15),
+(4, 3, 'F1', 19),
+(4, 4, 'A3', 22);
+
+INSERT INTO carmodels_spareparts
+(`carmodel_id`,
+`sparepart_id`)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6);
