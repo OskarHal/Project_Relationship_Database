@@ -1,0 +1,10 @@
+
+Language convention
+-------------------
+https://www.python.org/dev/peps/pep-0008/
+Attribut: model_name
+tabeller: tablename__ = 'car_models'
+klasser: CarModel(Base):
+
+Klassnamn i singular och tabellnamn i plural
+Namn har klassens namn i början exempelvis manufacturer_name
