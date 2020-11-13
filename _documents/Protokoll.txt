@@ -11,5 +11,35 @@ Tabeller som är kvar Order_Details, Carmodels_Spareparts, Spareparts_Stores
 
 Nästa stand-up Torsdag 12 November för att fortsätta jobba med 'Dummy data'.
 
+	FREDAG 13 / 11
+
+Har gjort:
+Alla har under gårdagen jobbat med att testa queries för att se över funktionaliteten i MySQL databasen.
+Vi gick även igenom grundläggande relationer och hur vi ska bygga upp det i SQLAlchemy.
+
+
+Ska göra:
+Börja med att bygga klasser och tabeller i SQLAlchemy. Vi kommer gemensamt gå igenom hur vi skapar de första klasserna och sedan dela upp de resterande och göra dem i par.
+
+Vi gick tillsammans igenom Tabellerna:
+-spareparts
+-carmodels
+-manufacturers
+-suppliers
+-carmodels_spareparts
+
+Andreas & Oscar jobbar vidare med tabellerna:
+-private_customers
+-company_customers
+-customers
+-customer_cars
+
+
+Astrid & Oskar jobbar vidare med tabellerna:
+-company_contacts
+-stores
+-orders
+-employees
+
 
 
