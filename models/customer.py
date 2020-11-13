@@ -8,7 +8,7 @@ class Customer(Base):
     customer_id = sa.Column(sa.Integer, primary_key=True)
     customer_type = sa.Column(sa.Integer, nullable=False)
     cars = relationship(
-        "Cars", back_populates="customers_cars"
+        "CustomerCar", back_populates="owner"
     )
     customer = relationship(
         "CompanyCustomer", "PrivateCustomer", back_populates=["company_customer", "private_customer"])
