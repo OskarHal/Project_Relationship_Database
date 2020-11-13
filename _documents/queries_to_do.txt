@@ -1,0 +1,18 @@
+Testning av databas
+-------------------
+
+Summan av värdet för alla ordrar på company_customers samt private_customers. 
+Hämta alla affärer som har en specifik sparepart
+Hämta alla modeller som en specifik sparepart passar till samt ta med tillverkaren
+Vilka bilar har privatkunder samt företagskunder
+Hämta företagskontakt till tillverkare nr 3
+Lägg till en ny order
+Ta bort en kund
+Ta ut alla förnamn för employees
+Ta ut alla butiker samt vilka reservdelar de har
+Hämta alla bilmodeller som det finns reservdelar till
+Hämta mejladress till en tillverkare för reservdel med description "horn"
+
+GOD LEVEL
+
+Vilken tillverkare av reservdel hade kund nummer 1
