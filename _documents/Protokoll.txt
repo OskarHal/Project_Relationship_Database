@@ -43,3 +43,7 @@ Astrid & Oskar jobbar vidare med tabellerna:
 
 
 
+	Måndag 16 November
+Ska göra:
+Göra klart dom sista modellerna och se till funktionaliteten på dessa.
+Göra om arkitekturen i projektet.
