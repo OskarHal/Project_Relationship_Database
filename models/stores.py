@@ -8,6 +8,8 @@ class Parent(Base):
  children = relationship("Child", back_populates="parent")
 
 '''
+
+
 class Store(Base):
     __tablename__ = 'stores'
     store_id = sa.Column(sa.Integer, primary_key=True)
@@ -15,16 +17,8 @@ class Store(Base):
     store_phone_nr = sa.Column(sa.String(45), nullable=False)
     store_email = sa.Column(sa.String(45), nullable=False)
     store_address = sa.Column(sa.String(45), nullable=False)
-
-    employees = relationship(
-        "Employee",
-     back_populates='store')
-
-    spare_parts = relationship(
-        "SparePart",
-
-        back_populates="car_models")
-
+    employees = relationship("Employee", back_populates="store")
+    spare_parts = relationship("SparePartStore", back_populates="store")
 
 
     def __repr__(self):

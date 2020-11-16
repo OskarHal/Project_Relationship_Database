@@ -19,13 +19,10 @@ class Employee(Base):
     employee_phone_nr = sa.Column(sa.String(45), nullable=False)
     employee_email = sa.Column(sa.String(45), nullable=False)
 
-    store = relationship(
-        "Store",
-        back_populates="employees")
+    store = relationship("Store", back_populates="employees")
 
     orders = relationship(
         "Order",
-        secondary='store', # ?
         back_populates="employees")
 
     def __repr__(self):
