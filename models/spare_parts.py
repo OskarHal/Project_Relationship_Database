@@ -23,6 +23,8 @@ class SparePart(Base):
         secondary=car_models_spare_parts,
         back_populates="spare_parts")
 
+    stores = relationship("SparePartStore", back_populates="spare_part")
+
     def __repr__(self):
         return f'SparePart(spare_part_id={self.spare_part_id}, ' \
                f'product_nr={self.product_nr}, ' \
@@ -32,5 +34,3 @@ class SparePart(Base):
                f'selling_price={self.selling_price} ' \
                f'reorder_level={self.reorder_level} ' \
                f'order_quantity={self.order_quantity})'
-
-
