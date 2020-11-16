@@ -1,3 +1,5 @@
+Tänk för fanken på att Brancha ut!
+
 Onsdag 11 November
 
 Har tillsammans gått igenom ER-diagram och kollar 
@@ -46,4 +48,13 @@ Astrid & Oskar jobbar vidare med tabellerna:
 	Måndag 16 November
 Ska göra:
 Göra klart dom sista modellerna och se till funktionaliteten på dessa.
-Göra om arkitekturen i projektet.
+Göra om strukturen i projektet.
+
+Astrid & Oskar 
+-jobbar vidare med sina modellerna.
+
+Andreas & Oscar
+-Jobbar med relationerna mellan orders och spareparts.
+
+Tillsammans gått igenom
+Spareparts_stores, samt kikat igenom dom olika modellerna
