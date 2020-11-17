@@ -58,3 +58,6 @@ Andreas & Oscar
 
 Tillsammans gått igenom
 Spareparts_stores, samt kikat igenom dom olika modellerna
+
+2020-11-17
+Igår gjorde vi klart alla modeller och gick igenom tillsammans. Idag ska vi testa att skapa en databas genom sqlalchemy samt skapa i alembic. 
