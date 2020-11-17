@@ -3,11 +3,11 @@ version: "3"
 services:
   db:
     image: mysql:latest
-    container_name: "Relations_DB"
+    container_name: "MySQL_DB"
     ports:
-      - "33007:3306"
+      - "33006:3306"
     cap_add:
       - SYS_NICE
     environment:
-      MYSQL_ROOT_PASSWORD: "s3cr37"
+      MYSQL_ROOT_PASSWORD: "password"
       MYSQL_DATABASE: carparts
