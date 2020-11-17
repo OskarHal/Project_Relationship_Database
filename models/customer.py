@@ -12,7 +12,7 @@ class Customer(Base):
     if customer_type == 1:
         customer = relationship("CompanyCustomer", back_populates="company_customer")
     elif customer_type == 2:
-        customer = relationship("PrivateCustomer", back_populates="private_customer")
+        customer = relationship("PrivateCustomer", back_populates="private_customer"
 
     def __repr__(self):
         if self.customer_type == 1:
