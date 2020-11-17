@@ -1,8 +1,8 @@
-"""create table suppliers
+"""create table manufacturers
 
-Revision ID: c4acf4c9c500
-Revises: b267a69f716e
-Create Date: 2020-11-17 14:30:57.079963
+Revision ID: f7d7ce05712f
+Revises: b45264bc0b96
+Create Date: 2020-11-17 15:06:41.441973
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c4acf4c9c500'
-down_revision = 'b267a69f716e'
+revision = 'f7d7ce05712f'
+down_revision = 'b45264bc0b96'
 branch_labels = None
 depends_on = None
 
