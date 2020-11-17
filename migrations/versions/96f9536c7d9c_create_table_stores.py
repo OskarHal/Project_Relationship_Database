@@ -8,7 +8,6 @@ Create Date: 2020-11-17 15:07:12.677478
 from alembic import op
 import sqlalchemy as sa
 
-
 # revision identifiers, used by Alembic.
 revision = '96f9536c7d9c'
 down_revision = '4add503fdd14'
@@ -17,8 +16,15 @@ depends_on = None
 
 
 def upgrade():
-    pass
+    op.create_table(
+        'stores',
+        sa.Column('store_id', sa.Integer, primary_key=True),
+        sa.Column('store_name', sa.String(45), nullable=False),
+        sa.Column('store_phone_nr', sa.String(45), nullable=False),
+        sa.Column('store_email', sa.String(45), nullable=False),
+        sa.Column('store_address', sa.String(45), nullable=False)
+    )
 
 
 def downgrade():
-    pass
+    op.drop_table('stores')
