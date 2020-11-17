@@ -1,15 +1,16 @@
-"""'car_models'
+"""create table carmodels
 
-Revision ID: 00c965f8a807
+Revision ID: d248229298a2
 Revises: 
-Create Date: 2020-11-17 11:46:16.774988
+Create Date: 2020-11-17 15:06:22.841987
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+
 # revision identifiers, used by Alembic.
-revision = '00c965f8a807'
+revision = 'd248229298a2'
 down_revision = None
 branch_labels = None
 depends_on = None
