@@ -1,5 +1,14 @@
-DB_USER = "puser"
-DB_PASSWORD = "lol"
-DB_HOST = "Localhost"
-DB_PORT = 33007
-DB_DATABASE = "carparts"
+import sqlalchemy
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from .db_settings import *
+
+engine = sqlalchemy.create_engine(
+    f'mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE}',
+    echo=True
+)
+
+Base = declarative_base()
+Session = sessionmaker()
+Session.configure(bind=engine)
+session = Session()
