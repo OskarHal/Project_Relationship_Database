@@ -17,8 +17,14 @@ depends_on = None
 
 
 def upgrade():
-    pass
+    op.create_table(
+        'spare_part_stores',
+        sa.Column('store_id', sa.Integer, sa.ForeignKey('stores.store_id'), primary_key=True),
+        sa.Column('spare_part_id', sa.Integer, sa.ForeignKey('spare_parts.spare_part_id'), primary_key=True),
+        sa.Column('stock', sa.Integer, nullable=False),
+        sa.Column('stock_location', sa.String(45), nullable=False)
+    )
 
 
 def downgrade():
-    pass
+    op.drop_table('spare_part_stores')
