@@ -1,5 +1,5 @@
 venv/
 .idea/
-almbic.ini
+alembic.ini
 app/db/db_settings/
 docker-compose.yml
