@@ -1,6 +1,7 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
 from db import Base
+from datetime import datetime
 
 
 class Order(Base):
@@ -9,7 +10,7 @@ class Order(Base):
     customer_id = sa.Column(sa.Integer, sa.ForeignKey('customers.customer_id'), nullable=True)
     employee_id = sa.Column(sa.Integer, sa.ForeignKey('employees.employee_id'), nullable=True)
     store_id = sa.Column(sa.Integer, sa.ForeignKey('stores.store_id'), nullable=True)
-    order_date = sa.Column(sa.DateTime, default="CURRENT_TIMESTAMP", nullable=False)
+    order_date = sa.Column(sa.DateTime, default=datetime.utcnow, nullable=False)
     customer = relationship("Customer", back_populates="orders")
     employees = relationship("Employee", back_populates="orders")
     stores = relationship("Store", back_populates="orders")
