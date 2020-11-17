@@ -18,12 +18,8 @@ class SparePart(Base):
     supplier_id = sa.Column(sa.Integer, sa.ForeignKey('suppliers.supplier_id'))
     manufacturer = relationship("Manufacturer", back_populates="spare_parts")
     supplier = relationship("Supplier", back_populates="spare_parts")
-    car_models = relationship(
-        "CarModel",
-        secondary=car_models_spare_parts,
-        back_populates="spare_parts")
-
     stores = relationship("SparePartStore", back_populates="spare_part")
+    car_models = relationship("CarModel", secondary=car_models_spare_parts, back_populates="spare_parts")
 
     def __repr__(self):
         return f'SparePart(spare_part_id={self.spare_part_id}, ' \
