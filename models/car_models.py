@@ -9,10 +9,7 @@ class CarModel(Base):
     car_model_id = sa.Column(sa.Integer, primary_key=True)
     model_name = sa.Column(sa.String(45), nullable=True)
     brand_name = sa.Column(sa.String(45), nullable=True)
-    spare_parts = relationship(
-        "SparePart",
-        secondary=car_models_spare_parts,
-        back_populates="car_models")
+    spare_parts = relationship("SparePart", secondary=car_models_spare_parts, back_populates="car_models")
 
     def __repr__(self):
         return f'CarModel(car_model_id={self.car_model_id}, ' \

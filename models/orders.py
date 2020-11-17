@@ -1,12 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from app.db import Base
-
-'''class Child(Base):
-    tablename = 'child'
-    id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey('parent.id'))
-    parent = relationship("Parent", back_populates="children")'''
+from app import Base
 
 
 class Order(Base):
@@ -15,22 +9,11 @@ class Order(Base):
     customer_id = sa.Column(sa.Integer, sa.ForeignKey('customers.customer_id'), nullable=True)
     employee_id = sa.Column(sa.Integer, sa.ForeignKey('employees.employee_id'), nullable=True)
     store_id = sa.Column(sa.Integer, sa.ForeignKey('stores.store_id'), nullable=True)
-    order_date = sa.Column(sa.DateTime, nullable=False)
-
-    customers = relationship(
-        "Customer",
-        back_populates="orders")
-
-    employees = relationship(
-        "Employee",
-        back_populates="orders")
-
-    stores = relationship(
-        "Store",
-        back_populates="orders")
-
-    spare_parts = relationship(
-        "OrderDetails")
+    order_date = sa.Column(sa.DateTime, default="CURRENT_TIMESTAMP", nullable=False)
+    customer = relationship("Customer", back_populates="orders")
+    employees = relationship("Employee", back_populates="orders")
+    stores = relationship("Store", back_populates="orders")
+    spare_parts = relationship("OrderDetails")
 
 
 def __repr__(self):

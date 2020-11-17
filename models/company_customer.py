@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from app.db import Base
+from app import Base
 
 
 class CompanyCustomer(Base):
@@ -11,8 +11,7 @@ class CompanyCustomer(Base):
     company_customer_last_name = sa.Column(sa.String(45), nullable=False)
     company_customer_email = sa.Column(sa.String(100), nullable=False)
     company_customer_phone = sa.Column(sa.String(45), nullable=False)
-    company_customer = relationship(
-        "Customer", back_populates="customer")
+    company_customer = relationship("Customer", back_populates="customer")
 
     def __repr__(self):
         return f'Customer ID={self.customer_id}, ' \

@@ -1,6 +1,6 @@
 import sqlalchemy as sa
-from app.db import Base
 from sqlalchemy.orm import relationship
+from app import Base
 
 
 class SparePartStore(Base):
@@ -11,3 +11,4 @@ class SparePartStore(Base):
     stock_location = sa.Column(sa.Integer, nullable=False)
     spare_part = relationship('SparePart', back_populates="stores")
     store = relationship('Store', back_populates="spare_parts")
+
