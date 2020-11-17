@@ -1,8 +1,8 @@
-"""create table customer_cars
+"""create table carmodels
 
-Revision ID: 6517f568e1a4
-Revises: 0bffe4078238
-Create Date: 2020-11-17 11:59:01.631498
+Revision ID: 3e7ff03ecf0a
+Revises: c4acf4c9c500
+Create Date: 2020-11-17 14:31:00.457969
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6517f568e1a4'
-down_revision = '0bffe4078238'
+revision = '3e7ff03ecf0a'
+down_revision = 'c4acf4c9c500'
 branch_labels = None
 depends_on = None
 

@@ -1,8 +1,8 @@
-"""create association order_details
+"""create table private_customers
 
-Revision ID: fd99d5c51f1e
-Revises: c4b27f9c44f2
-Create Date: 2020-11-17 11:59:28.926972
+Revision ID: be1353fcfbe0
+Revises: 6d959cbd2222
+Create Date: 2020-11-17 14:31:07.375486
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fd99d5c51f1e'
-down_revision = 'c4b27f9c44f2'
+revision = 'be1353fcfbe0'
+down_revision = '6d959cbd2222'
 branch_labels = None
 depends_on = None
 
