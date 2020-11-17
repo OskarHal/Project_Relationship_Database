@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from app import Base
+from db import Base
 
 
 class SparePartStore(Base):

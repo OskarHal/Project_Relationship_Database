@@ -1,5 +1,5 @@
 import sqlalchemy as sa
-from app import Base
+from db import Base
 
 car_models_spare_parts = sa.Table(
     'car_models_spare_parts',
