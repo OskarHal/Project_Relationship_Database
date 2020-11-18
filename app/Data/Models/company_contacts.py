@@ -9,7 +9,7 @@ class ManufacturerContact(Base):
     manufacturer_contact_name = sa.Column(sa.String(100), nullable=False)
     manufacturer_contact_phone_nr = sa.Column(sa.String(45), nullable=True)
     manufacturer_contact_email = sa.Column(sa.String(100), nullable=True)
-    manufacturer_id = sa.Column(sa.Integer, sa.ForeignKey("manufacturers.manufacturer_id"))
+    manufacturer_id = sa.Column(sa.Integer, sa.ForeignKey("manufacturers.manufacturer_id"),ondelete= 'CASCADEL', onupdate='CASCADE')
     manufacturer = relationship("Manufacturer", back_populates="company_contacts")
 
     def __repr__(self):
