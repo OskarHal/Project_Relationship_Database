@@ -1,5 +1,5 @@
 import sqlalchemy as sa
-from db import Base
+from Data.db import Base
 from sqlalchemy.orm import relationship
 
 

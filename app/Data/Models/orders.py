@@ -1,7 +1,8 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from db import Base
+from Data.db import Base
 from datetime import datetime
+from .order_details import OrderDetail
 
 
 class Order(Base):
@@ -13,8 +14,8 @@ class Order(Base):
     order_date = sa.Column(sa.DateTime, default=datetime.utcnow, nullable=False)
     customer = relationship("Customer", back_populates="orders")
     employees = relationship("Employee", back_populates="orders")
-    stores = relationship("Store", back_populates="orders")
-    spare_parts = relationship("OrderDetails")
+    store = relationship("Store", back_populates="orders")
+    spare_parts = relationship(OrderDetail)
 
 
 def __repr__(self):

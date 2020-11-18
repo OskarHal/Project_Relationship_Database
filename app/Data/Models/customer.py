@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from db import Base
+from Data.db import Base
 
 
 class Customer(Base):
@@ -9,15 +9,17 @@ class Customer(Base):
     customer_type = sa.Column(sa.Integer, nullable=False)
     cars = relationship("CustomerCar", back_populates="owner")
     orders = relationship("Order", back_populates="customer")
-    if customer_type == 1:
-        customer = relationship("CompanyCustomer", back_populates="company_customer")
-    elif customer_type == 2:
-        customer = relationship("PrivateCustomer", back_populates="private_customer")
+    comp_customer = relationship("CompanyCustomer", back_populates="customer")
+    priv_customer = relationship("PrivateCustomer", back_populates="customer")
+
+    # TESTA MED @property
 
     def __repr__(self):
         if self.customer_type == 1:
-            return f'Customer ID={self.customer_id}, Company Customer' \
-                    f'Owns cars with registration number: {self.cars.registration_nr}'
+            return f'Customer ID={self.customer_id}, Company Customer'
+                    # f'Owns cars with registration number: {self.cars.registration_nr}'
         else:
-            return f'Customer ID={self.customer_id}, Private Customer' \
-                    f'Owns cars with registration number: {self.cars.registration_nr}'
+            return f'Customer ID={self.customer_id}, Private Customer'
+                    # f'Owns cars with registration number: {self.cars.registration_nr}'
+
+
