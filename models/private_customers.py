@@ -10,7 +10,7 @@ class PrivateCustomer(Base):
     private_customer_last_name = sa.Column(sa.String(45), nullable=False)
     private_customer_phone = sa.Column(sa.String(45), nullable=False)
     private_customer_email = sa.Column(sa.String(100), nullable=False)
-    customer = relationship("Customer", back_populates="customer")
+    customer = relationship("Customer", back_populates="priv_customer")
 
     def __repr__(self):
         return f'Customer ID={self.customer_id}, ' \

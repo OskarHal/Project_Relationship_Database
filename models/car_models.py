@@ -1,7 +1,7 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
 from db import Base
-from models import car_models_spare_parts
+from .car_models_spare_parts import car_models_spare_parts
 
 
 class CarModel(Base):

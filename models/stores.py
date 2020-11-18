@@ -12,6 +12,7 @@ class Store(Base):
     store_address = sa.Column(sa.String(45), nullable=False)
     employees = relationship("Employee", back_populates="store")
     spare_parts = relationship("SparePartStore", back_populates="store")
+    orders = relationship("Order", back_populates="store")
 
     def __repr__(self):
         return f'Store(store_id={self.store_id}, ' \
