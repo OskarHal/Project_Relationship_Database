@@ -19,14 +19,12 @@ depends_on = None
 def upgrade():
     op.create_table(
         'company_customers',
-
         sa.Column('customer_id', sa.Integer, sa.ForeignKey('customers.customer_id'), autoincrement=False, primary_key=True),
         sa.Column('company_customer_name', sa.String(100), nullable=False),
         sa.Column('company_customer_first_name', sa.String(45), nullable=False),
         sa.Column('company_customer_last_name', sa.String(45), nullable=False),
         sa.Column('company_customer_email', sa.String(100), nullable=False),
         sa.Column('company_customer_phone', sa.String(45), nullable=False),
-
     )
 
 
