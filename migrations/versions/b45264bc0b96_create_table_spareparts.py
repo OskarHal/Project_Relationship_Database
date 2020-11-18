@@ -32,4 +32,4 @@ def upgrade():
     )
 
 def downgrade():
-    op.drop_table('stores_employees')
+    op.drop_table('spare_parts')
