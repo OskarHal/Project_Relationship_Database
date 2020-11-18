@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from db import Base
+from Data.db import Base
 
 
 class PrivateCustomer(Base):

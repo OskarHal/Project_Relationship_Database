@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from db import Base
+from Data.db import Base
 from .car_models_spare_parts import car_models_spare_parts
 
 

@@ -1,18 +1,18 @@
-from db import Base, engine, session
-from models.manufacturers import Manufacturer
-from models.company_contacts import ManufacturerContact
-from models.suppliers import Supplier
-from models.spare_parts import SparePart
-from models.car_models import CarModel
-from models.customer import Customer
-from models.private_customers import PrivateCustomer
-from models.company_customer import CompanyCustomer
-from models.customer_cars import CustomerCar
-from models.stores import Store
-from models.employees import Employee
-from models.orders import Order
-from models.order_details import OrderDetail
-from models.spare_part_stores import SparePartStore
+from Data.db import Base, engine, session
+from Data.Models.manufacturers import Manufacturer
+from Data.Models.company_contacts import ManufacturerContact
+from Data.Models.suppliers import Supplier
+from Data.Models.spare_parts import SparePart
+from Data.Models.car_models import CarModel
+from Data.Models.customer import Customer
+from Data.Models.private_customers import PrivateCustomer
+from Data.Models.company_customer import CompanyCustomer
+from Data.Models.customer_cars import CustomerCar
+from Data.Models.stores import Store
+from Data.Models.employees import Employee
+from Data.Models.orders import Order
+from Data.Models.order_details import OrderDetail
+from Data.Models.spare_part_stores import SparePartStore
 
 
 def main():
