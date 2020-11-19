@@ -16,6 +16,7 @@ from Data.Models.spare_part_stores import SparePartStore
 
 
 def main():
+    #hej hej hej
     Base.metadata.create_all(engine)
     # order_1 = Order(customer_id=1, employee_id=1, store_id=1)
 
