@@ -28,10 +28,6 @@ def main():
     # session.add(order_1)
     # session.commit()
     # print(order_1.order_date)
-    kunder = ["1", "2", "3"]
-
-
-    print(("\n".join(kund for kund in kunder)))
 
     # spareparts = session.query(SparePart).all()
     #
