@@ -17,8 +17,8 @@ class Supplier(Base):
     def __repr__(self):
         return f'Supplier(SupplierId={self.supplier_id}, ' \
                f'supplier_name={self.supplier_name}, ' \
-               f'supplier phone_nr={self.supplier_phone_nr} ', \
-               f'supplier email={self.supplier_email} ', \
-               f'supplier address={self.supplier_address}) ', \
-               f'supplier contact_first_name={self.supplier_contact_first_name}) ', \
-               f'supplier contact_last_name={self.supplier_contact_last_name})',
+               f'supplier phone_nr={self.supplier_phone_nr}, ' \
+               f'supplier email={self.supplier_email}, ' \
+               f'supplier address={self.supplier_address}), ' \
+               f'supplier contact_first_name={self.supplier_contact_first_name}), ' \
+               f'supplier contact_last_name={self.supplier_contact_last_name}),'

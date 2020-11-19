@@ -27,8 +27,8 @@ def upgrade():
         sa.Column('reorder_level', sa.Integer, nullable=True),
         sa.Column('order_quantity', sa.Integer, nullable=True),
         sa.Column('estimated_time_of_arrival', sa.DATE, nullable=True),
-        sa.Column('manufacturer_id', sa.Integer, sa.ForeignKey('manufacturers.manufacturer_id')),
-        sa.Column('supplier_id', sa.Integer, sa.ForeignKey('suppliers.supplier_id')),
+        sa.Column('manufacturer_id', sa.Integer, sa.ForeignKey('manufacturers.manufacturer_id', ondelete= 'SET NULL', onupdate='CASCADE')),
+        sa.Column('supplier_id', sa.Integer, sa.ForeignKey('suppliers.supplier_id', ondelete= 'SET NULL', onupdate='CASCADE')),
     )
 
 

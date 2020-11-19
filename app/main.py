@@ -18,6 +18,8 @@ from UI.main_menu import main_menu
 
 def main():
     Base.metadata.create_all(engine)
+    main_menu()
+
     # order_1 = Order(customer_id=1, employee_id=1, store_id=1)
 
     # la till back populates på manufacturer
@@ -26,6 +28,7 @@ def main():
     # session.add(order_1)
     # session.commit()
     # print(order_1.order_date)
+
 
     # spareparts = session.query(SparePart).all()
     #
@@ -46,8 +49,7 @@ def main():
     # for order in orders:
     #     print(f"{order.order_date}".center(30, '='))
 
-    main_menu()
-
+    
 if __name__ == "__main__":
     main()
 
