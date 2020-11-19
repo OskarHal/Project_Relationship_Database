@@ -30,15 +30,25 @@ def main():
 
     customers = session.query(Customer).all()
 
+    orders = session.query(Order).all()
+
+
+
+
     for customer in customers:
         print(customer)
 
     for spare in spareparts:
-        print(f"{spare.description}".center(30, '='))
+        print(f"{spare.description,spare.manufacturer}".center(30, '='))
         for stores_parts in spare.stores:
             print(stores_parts.store.store_name.ljust(15), end="")
             print(stores_parts.stock_location.ljust(10), end="")
             print(f"{stores_parts.stock}")
+
+
+    for order in orders:
+        print(f"{order.order_date}".center(30, '='))
+
 
 
 if __name__ == "__main__":

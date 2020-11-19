@@ -5,7 +5,7 @@ from Data.db import Base
 
 class PrivateCustomer(Base):
     __tablename__ = 'private_customers'
-    customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.customer_id"), primary_key=True, autoincrement=False,ondelete= 'CASCADE', onupdate='CASCADE')
+    customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.customer_id", ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, autoincrement=False)
     private_customer_first_name = sa.Column(sa.String(45), nullable=False)
     private_customer_last_name = sa.Column(sa.String(45), nullable=False)
     private_customer_phone = sa.Column(sa.String(45), nullable=False)

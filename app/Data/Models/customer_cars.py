@@ -10,7 +10,7 @@ class CustomerCar(Base):
     customer_car_model = sa.Column(sa.String(45), nullable=False)
     customer_car_model_year = sa.Column(sa.Integer, nullable=False)
     customer_car_color = sa.Column(sa.String(45), nullable=False)
-    customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.customer_id"),ondelete= 'CASCADE', onupdate='CASCADE')
+    customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.customer_id", ondelete='CASCADE', onupdate='CASCADE'))
     owner = relationship("Customer", back_populates="cars")
 
     def __repr__(self):
