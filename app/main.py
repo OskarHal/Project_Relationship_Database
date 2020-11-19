@@ -25,6 +25,10 @@ def main():
     # session.add(order_1)
     # session.commit()
     # print(order_1.order_date)
+    kunder = ["1", "2", "3"]
+
+
+    print(("\n".join(kund for kund in kunder)))
 
     spareparts = session.query(SparePart).all()
 
@@ -32,24 +36,18 @@ def main():
 
     orders = session.query(Order).all()
 
-
-
-
     for customer in customers:
         print(customer)
 
     for spare in spareparts:
-        print(f"{spare.description,spare.manufacturer}".center(30, '='))
+        print(f"{spare.description}".center(30, '='))
         for stores_parts in spare.stores:
             print(stores_parts.store.store_name.ljust(15), end="")
             print(stores_parts.stock_location.ljust(10), end="")
             print(f"{stores_parts.stock}")
 
-
     for order in orders:
         print(f"{order.order_date}".center(30, '='))
-
-
 
 if __name__ == "__main__":
     main()
