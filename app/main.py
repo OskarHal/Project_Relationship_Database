@@ -18,6 +18,7 @@ from models.spare_part_stores import SparePartStore
 
 def main():
     Base.metadata.create_all(engine)
+    print("Hello world")
 
 
 if __name__ == "__main__":
