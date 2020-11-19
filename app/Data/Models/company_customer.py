@@ -16,6 +16,6 @@ class CompanyCustomer(Base):
     def __repr__(self):
         return f'Customer ID={self.customer_id}, ' \
                f'Company Name={self.company_customer_name}, ' \
-               f'Company Contact Name={self.company_customer_first_name} {self.company_customer_last_name}', \
-               f'Company Contact Email={self.company_customer_email})', \
+               f'Company Contact Name={self.company_customer_first_name} {self.company_customer_last_name}, ' \
+               f'Company Contact Email={self.company_customer_email}), ' \
                f'Company Contact PhoneNr={self.company_customer_phone})'
