@@ -18,9 +18,9 @@ class Order(Base):
     spare_parts = relationship(OrderDetail)
 
 
-def __repr__(self):
-    return f'Order(OrderId={self.order_id}, ' \
-           f'customer_id={self.customer_id}, ' \
-           f'employee_id={self.employee_id} ', \
-           f'store_id={self.store_id} ', \
-           f'order_date={self.order_date}) ',
+    def __repr__(self):
+        return f'Order(OrderId={self.order_id}, ' \
+               f'customer_id={self.customer_id}, ' \
+               f'employee_id={self.employee_id} ', \
+               f'store_id={self.store_id} ', \
+               f'order_date={self.order_date}) ',
