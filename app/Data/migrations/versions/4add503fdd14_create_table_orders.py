@@ -20,9 +20,9 @@ def upgrade():
     op.create_table(
         'orders',
         sa.Column('order_id', sa.Integer, primary_key=True),
-        sa.Column('customer_id', sa.Integer, sa.ForeignKey('customers.customer_id'), nullable=True),
-        sa.Column('employee_id', sa.Integer, sa.ForeignKey('employees.employee_id'), nullable=True),
-        sa.Column('store_id', sa.Integer, sa.ForeignKey('stores.store_id'), nullable=True),
+        sa.Column('customer_id', sa.Integer, sa.ForeignKey('customers.customer_id', ondelete='SET NULL', onupdate='CASCADE'), nullable=True),
+        sa.Column('employee_id', sa.Integer, sa.ForeignKey('employees.employee_id', ondelete='SET NULL', onupdate='CASCADE'), nullable=True),
+        sa.Column('store_id', sa.Integer, sa.ForeignKey('stores.store_id', ondelete='SET NULL', onupdate='CASCADE'), nullable=True),
         sa.Column('order_date', sa.DateTime, default=datetime.utcnow, nullable=False)
     )
 
