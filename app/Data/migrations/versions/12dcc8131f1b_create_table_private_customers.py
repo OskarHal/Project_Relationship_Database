@@ -18,7 +18,7 @@ depends_on = None
 def upgrade():
     op.create_table(
         'private_customers',
-        sa.Column('customer_id', sa.Integer, sa.ForeignKey("customers.customer_id"), primary_key=True, autoincrement=False),
+        sa.Column('customer_id', sa.Integer, sa.ForeignKey("customers.customer_id", ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, autoincrement=False),
         sa.Column('private_customer_first_name', sa.String(45), nullable=False),
         sa.Column('private_customer_last_name', sa.String(45), nullable=False),
         sa.Column('private_customer_phone', sa.String(45), nullable=False),
