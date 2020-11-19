@@ -24,8 +24,8 @@ class SparePart(Base):
     def __repr__(self):
         return f'SparePart(spare_part_id={self.spare_part_id}, ' \
                f'product_nr={self.product_nr}, ' \
-               f'manufacturer_id={self.manufacturer_id} ,' \
-               f'supplier_id={self.supplier_id} ,' \
+               f'manufacturer_id={self.manufacturer_id}, ' \
+               f'supplier_id={self.supplier_id}, ' \
                f'purchase_price={self.purchase_price} ' \
                f'selling_price={self.selling_price} ' \
                f'reorder_level={self.reorder_level} ' \

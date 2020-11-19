@@ -29,7 +29,6 @@ def main():
     # session.commit()
     # print(order_1.order_date)
 
-
     # spareparts = session.query(SparePart).all()
     #
     # customers = session.query(Customer).all()
@@ -49,7 +48,6 @@ def main():
     # for order in orders:
     #     print(f"{order.order_date}".center(30, '='))
 
-    
 if __name__ == "__main__":
     main()
 
