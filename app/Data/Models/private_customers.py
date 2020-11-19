@@ -17,4 +17,4 @@ class PrivateCustomer(Base):
                f'Private customer first name={self.private_customer_first_name}, ' \
                f'Private customer last name={self.private_customer_last_name}, ' \
                f'Private customer phone={self.private_customer_phone}, ' \
-               f'Private customer email={self.private_customer_email}, '
+               f'Private customer email={self.private_customer_email},'

@@ -13,7 +13,8 @@ class Manufacturer(Base):
     spare_parts = relationship("SparePart", back_populates="manufacturer")
 
     def __repr__(self):
-        return f'Manufacturer(manufacturer_id={self.manufacturer_id}, ' \
-               f'manufacturer_name={self.manufacturer_name}, ' \
-               f'phone_nr={self.manufacturer_phone_nr} ', \
-               f'address={self.manufacturer_address})',
+        return f'Manufacturer={self.manufacturer_id},' \
+               f'manufacturer_name={self.manufacturer_name},' \
+               f'phone_nr={self.manufacturer_phone_nr},'\
+               f'address={self.manufacturer_address}'
+
