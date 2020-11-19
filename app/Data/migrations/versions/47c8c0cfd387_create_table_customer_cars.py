@@ -19,7 +19,7 @@ def upgrade():
     op.create_table(
         'customer_cars',
         sa.Column('registration_nr', sa.String(45), primary_key=True, autoincrement=False),
-        sa.Column('customer_car_brand'.sa.String(45), nullable=False),
+        sa.Column('customer_car_brand', sa.String(45), nullable=False),
         sa.Column('customer_car_model', sa.String(45), nullable=False),
         sa.Column('customer_car_model_year', sa.Integer, nullable=False),
         sa.Column('customer_car_color', sa.String(45), nullable=False),
