@@ -17,6 +17,6 @@ class Employee(Base):
     def __repr__(self):
         return f'Employee(employee_id ={self.employee_id}, ' \
                f'employee_name={self.employee_name}, ' \
-               f'employee_lastname={self.employee_lastname} ', \
-               f'employee_phone_nr={self.employee_phone_nr})',\
-               f'employee_email={self.employee_email})',
+               f'employee_lastname={self.employee_lastname}, ' \
+               f'employee_phone_nr={self.employee_phone_nr}), '\
+               f'employee_email={self.employee_email}),'

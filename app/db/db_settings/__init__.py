@@ -1,5 +1,0 @@
-DB_USER = "pyuser"
-DB_PASSWORD = "s3cr37"
-DB_HOST = "localhost"
-DB_PORT = "33006"
-DB_DATABASE = "carparts"

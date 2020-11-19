@@ -16,7 +16,7 @@ class CustomerCar(Base):
     def __repr__(self):
         return f'Registration number={self.registration_nr}, ' \
                f'Car brand={self.customer_car_brand}, ' \
-               f'Car Model={self.customer_car_model} ', \
-               f'Model year={self.customer_car_model_year}', \
-               f'Color={self.customer_car_color}',
+               f'Car Model={self.customer_car_model},' \
+               f'Model year={self.customer_car_model_year}, ' \
+               f'Color={self.customer_car_color}, '
 

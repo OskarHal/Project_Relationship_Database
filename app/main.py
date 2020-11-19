@@ -29,29 +29,42 @@ def main():
     # session.commit()
     # print(order_1.order_date)
 
+    car_models = session.query(CarModel).all()
+
+
+
     spareparts = session.query(SparePart).all()
-
     customers = session.query(Customer).all()
-
     orders = session.query(Order).all()
-
-
-
 
     for customer in customers:
         print(customer)
 
-    for spare in spareparts:
-        print(f"{spare.description,spare.manufacturer}".center(30, '='))
-        for stores_parts in spare.stores:
-            print(stores_parts.store.store_name.ljust(15), end="")
-            print(stores_parts.stock_location.ljust(10), end="")
-            print(f"{stores_parts.stock}")
+    for carmodel in car_models:
+        print(carmodel)
 
+
+
+    for spare in spareparts:
+        print(f"{spare.description, spare.manufacturer.manufacturer_name}".center(30, '='))
+        print(repr(spare))
+
+
+
+"""
+        for stores_parts in spare.stores:
+            print(str(stores_parts))
+            print(type(spareparts))
+
+
+
+            #print(stores_parts.store.store_name.ljust(15), end="")
+            #print(stores_parts.stock_location.ljust(10), end="")
+            #print(f"{stores_parts.stock}")
 
     for order in orders:
         print(f"{order.order_date}".center(30, '='))
-
+"""
 
 
 if __name__ == "__main__":
