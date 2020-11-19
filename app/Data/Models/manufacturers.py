@@ -15,5 +15,5 @@ class Manufacturer(Base):
     def __repr__(self):
         return f'Manufacturer(manufacturer_id={self.manufacturer_id}, ' \
                f'manufacturer_name={self.manufacturer_name}, ' \
-               f'phone_nr={self.manufacturer_phone_nr} ', \
-               f'address={self.manufacturer_address})',
+               f'phone_nr={self.manufacturer_phone_nr}, '\
+               f'address={self.manufacturer_address}), '
