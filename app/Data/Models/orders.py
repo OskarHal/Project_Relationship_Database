@@ -16,7 +16,6 @@ class Order(Base):
     store = relationship("Store", back_populates="orders")
     spare_parts = relationship("OrderDetail")
 
-
     def __repr__(self):
         return f'Order(OrderId={self.order_id}, ' \
                f'customer_id={self.customer_id}, ' \
