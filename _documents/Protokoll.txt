@@ -60,4 +60,21 @@ Tillsammans gått igenom
 Spareparts_stores, samt kikat igenom dom olika modellerna
 
 2020-11-17
-Igår gjorde vi klart alla modeller och gick igenom tillsammans. Idag ska vi testa att skapa en databas genom sqlalchemy samt skapa i alembic. 
+Igår gjorde vi klart alla modeller och gick igenom tillsammans. Idag ska vi testa att skapa en databas genom sqlalchemy samt skapa i alembic.
+
+2020-11-18
+
+Lektionsdag, Oskar och Oscar skapar en indelning för mapparna. Anderas och Astrid går igenom CASCADE m.m i SQLAlchemy modellerna, Anderas uppdaterat relationer i Modellerna.
+
+2020-11-18 
+
+- Löser lite buggar med repern tilsammans. Fortsätter med Alembic och migrations.
+- Kvar att göra är menyn, repo, controllers, lägga i mer data. Delar upp arbetet med menyn. Börjar med menyn. 
+
+
+
+
+
+
+
+
