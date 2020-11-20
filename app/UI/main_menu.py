@@ -1,5 +1,6 @@
 from UI.customer_menu import customers_menu
 from UI.product_menu import products_menu
+from UI.order_menu import order_menu
 
 
 def main_menu():
@@ -17,6 +18,6 @@ def main_menu():
         elif selection == "2":
             products_menu()
         elif selection == "3":
-            pass
+            order_menu()
         elif selection == "0":
             break
