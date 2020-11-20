@@ -1,5 +1,5 @@
 from Controllers.customer_controller \
-import get_all_customers, add_new_company_customer
+    import get_all_customers, add_new_company_customer
 
 
 def edit_company_customer_menu():
@@ -21,8 +21,8 @@ def company_customer_menu():
         selection = input("> ")
         if selection == "1":
             customers = get_all_customers(1)
-            #for customer in customers:
-                #print(customer)
+            # for customer in customers:
+            # print(customer)
             pass
         elif selection == "2":
             edit_company_customer_menu()
@@ -42,21 +42,9 @@ def customers_menu():
         print("2.Private Company")
         print("0.Exit")
         selection = input("> ")
-
         if selection == "1":
             company_customer_menu()
-
         elif selection == "2":
             pass
         elif selection == "0":
             break
-
-
-
-
-
-
-
-
-
-
