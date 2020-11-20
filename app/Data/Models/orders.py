@@ -2,7 +2,6 @@ import sqlalchemy as sa
 from sqlalchemy.orm import relationship
 from Data.db import Base
 from datetime import datetime
-from .order_details import OrderDetail
 
 
 class Order(Base):
@@ -15,12 +14,12 @@ class Order(Base):
     customer = relationship("Customer", back_populates="orders")
     employees = relationship("Employee", back_populates="orders")
     store = relationship("Store", back_populates="orders")
-    spare_parts = relationship(OrderDetail)
+    spare_parts = relationship("OrderDetail")
 
 
     def __repr__(self):
         return f'Order(OrderId={self.order_id}, ' \
                f'customer_id={self.customer_id}, ' \
-               f'employee_id={self.employee_id} ', \
-               f'store_id={self.store_id} ', \
-               f'order_date={self.order_date}) ',
+               f'employee_id={self.employee_id}, ' \
+               f'store_id={self.store_id}, ' \
+               f'order_date={self.order_date})'

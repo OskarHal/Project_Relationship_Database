@@ -23,7 +23,7 @@ def upgrade():
         sa.Column('customer_car_model', sa.String(45), nullable=False),
         sa.Column('customer_car_model_year', sa.Integer, nullable=False),
         sa.Column('customer_car_color', sa.String(45), nullable=False),
-        sa.Column('customer_id', sa.Integer, sa.ForeignKey("customers.customer_id"))
+        sa.Column('customer_id', sa.Integer, sa.ForeignKey("customers.customer_id", ondelete='CASCADE', onupdate='CASCADE'))
     )
 
 

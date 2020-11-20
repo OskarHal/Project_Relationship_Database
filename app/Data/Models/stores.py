@@ -17,6 +17,6 @@ class Store(Base):
     def __repr__(self):
         return f'Store(store_id={self.store_id}, ' \
                f'store_name={self.store_name}, ' \
-               f'store_phone_nr={self.store_phone_nr} ', \
-               f'store_email={self.store_email} ', \
-               f'store_address={self.store_address}) ',
+               f'store_phone_nr={self.store_phone_nr}, ' \
+               f'store_email={self.store_email}, ' \
+               f'store_address={self.store_address}), '

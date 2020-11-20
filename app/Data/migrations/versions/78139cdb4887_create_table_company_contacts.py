@@ -22,7 +22,7 @@ def upgrade():
         sa.Column('manufacturer_contact_name', sa.String(100), nullable=False),
         sa.Column('manufacturer_contact_phone_nr', sa.String(45), nullable=True),
         sa.Column('manufacturer_contact_email', sa.String(100), nullable=True),
-        sa.Column('manufacturer_id', sa.Integer, sa.ForeignKey("manufacturers.manufacturer_id"))
+        sa.Column('manufacturer_id', sa.Integer, sa.ForeignKey("manufacturers.manufacturer_id",onupdate='CASCADE', ondelete='CASCADE'))
     )
 
 

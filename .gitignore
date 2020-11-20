@@ -1,6 +1,6 @@
 venv/
 .idea/
-alembic.ini
+app/Data/alembic.ini
 app/Data/db/db_settings/
 docker-compose.yml
 __pycache__/
