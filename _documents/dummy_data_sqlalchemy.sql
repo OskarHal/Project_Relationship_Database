@@ -58,8 +58,8 @@ VALUES
 INSERT INTO customers
 (customer_type)
 VALUES
-(1),
-(2);
+(2),
+(1);
 
 INSERT INTO spare_parts
 (product_nr,

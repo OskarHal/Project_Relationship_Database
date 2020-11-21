@@ -3,6 +3,7 @@ ERROR_MESSAGE_ONE = "There is no entry in the database "
 ERROR_MESSAGE_TWO = " Your type of input is wrong "
 
 
+
 def manipulation_data(customer):
     while True:
         print("Select what you want to do?")
@@ -74,7 +75,6 @@ def customers_menu():
         print("3.Add New Customer")
         print("0.Exit")
         selection = input("> ")
-
         if selection == "1":
             customers = get_all_customers()
             for customer in customers:
@@ -85,13 +85,3 @@ def customers_menu():
             pass
         elif selection == "0":
             break
-
-
-
-
-
-
-
-
-
-
