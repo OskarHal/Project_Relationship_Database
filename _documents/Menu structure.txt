@@ -1,0 +1,46 @@
+2. product_menu
+		1. Select product
+				1. Find spare part by ProductNr
+				2. Find spare part by Name
+					input sparepart
+					(skriv ut all information)
+						     output spare part information
+						     supplier information
+						     manufacturer information
+						     store information
+					       vad du vill göra?
+						   1. ändra spare part
+						   2. ta bort spare part
+						   3. Exit
+				
+		2. Exit			
+	3. order_menu
+	4. Exit
+	
+	
+
+funktioner:
+	add 
+	remove
+	get
+	edit
+
+
+
+Main menu
+	1. customer_menu
+		1. View customer
+		2. Select customer
+			Select customer menu
+				1. Find customer by id
+				2. Find customer by company name
+					(visa info om kund)
+					Vad vill du göra menu
+						1. ändra uppgifter på customer	
+						2. ta bort customer
+		3. Add new customer
+		4. Exit
+
+
+
+

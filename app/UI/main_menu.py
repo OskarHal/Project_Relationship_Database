@@ -3,6 +3,7 @@ from UI.product_menu import products_menu
 from UI.order_menu import order_menu
 
 
+
 def main_menu():
     while True:
         print("Main Menu")
@@ -16,7 +17,7 @@ def main_menu():
         if selection == "1":
             customers_menu()
         elif selection == "2":
-            products_menu()
+            product_menu()
         elif selection == "3":
             order_menu()
         elif selection == "0":
