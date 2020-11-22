@@ -7,6 +7,7 @@ def get_all_customers():
     private_customer = pcr.get_private_customer()
     return company_customer+private_customer
 
+
 # All felhantering i Controllern??
 def get_customer_by_id(selected_id):
     return pcr.get_customer_by_id(selected_id)
