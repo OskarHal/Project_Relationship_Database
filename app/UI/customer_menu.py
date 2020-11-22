@@ -1,7 +1,11 @@
 from Controllers.customer_controller import get_all_customers, get_customer_by_id
+from Data.Models.company_customer import CompanyCustomer
+from Data.Models.customer import Customer
+from Data.Models.private_customers import PrivateCustomer
+from Data.db import session
+
 ERROR_MESSAGE_ONE = "There is no entry in the database "
 ERROR_MESSAGE_TWO = " Your type of input is wrong "
-
 
 
 def manipulation_data(customer):
@@ -66,6 +70,53 @@ def select_customer_menu():
             break
 
 
+def add_private_customer(customer_type):
+    while True:
+        print("Private Customer".center(30, " "))
+        print("".center(30, "="))
+
+        priv_customer_dict = {f"private_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["First name", "Last name", "Phone", "Email"]}
+
+        private_customer = PrivateCustomer(**priv_customer_dict)
+        private_customer.customer = Customer(customer_type=customer_type)
+
+        session.add(private_customer)
+        session.commit()
+        break
+
+
+def add_company_customer(customer_type):
+    while True:
+        print("Company Customers".center(30, " "))
+        print("".center(30, "="))
+
+        comp_customer_dict = {f"company_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["Company Name", "Contact first name", "Contact last Name", "Email", "Phone"]}
+
+        company_customer = CompanyCustomer(**comp_customer_dict)
+        company_customer.customer = Customer(customer_type=customer_type)
+
+        session.add(company_customer)
+        session.commit()
+        break
+
+
+def add_customer_menu():
+    while True:
+        print("Add Customers Menu".center(30, " "))
+        print("".center(30, "="))
+        try:
+            customer_type = int(input("Enter customer type:\n(1) Private\n(2) Company\n:> "))
+        except ValueError:
+            print(f"{ERROR_MESSAGE_TWO}")
+            continue
+        if customer_type == 1:
+            add_private_customer(customer_type)
+        elif customer_type == 2:
+            add_company_customer(customer_type)
+        elif customer_type not in [1, 2]:
+            print("fel")
+
+
 def customers_menu():
     while True:
         print("Customers Menu")
@@ -82,6 +133,6 @@ def customers_menu():
         elif selection == "2":
             select_customer_menu()
         elif selection == "3":
-            pass
+            add_customer_menu()
         elif selection == "0":
             break
