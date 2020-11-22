@@ -2,8 +2,10 @@ from Data.db import session
 from Data.Models.orders import Order
 
 
-def create_order():
-    pass
+def create_order(new_order, prod_details):
+    session.add(new_order)
+    session.add(prod_details)
+    session.commit()
 
 
 def find_order_by_id(order_id):
