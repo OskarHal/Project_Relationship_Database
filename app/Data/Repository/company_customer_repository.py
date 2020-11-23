@@ -13,5 +13,12 @@ def add_company_customer(customer):
 
 
 def delete_customer(customer):
-    session.query(Customer).filter(Customer.customer_id == customer[0].customer_id).delete()
-    session.commit()
+    success = False
+    try:
+        session.query(Customer).filter(Customer.customer_id == customer[0].customer_id).delete()
+        session.commit()
+        success = True
+    except:
+        session.rollback()
+    finally:
+        return success

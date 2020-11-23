@@ -1,11 +1,16 @@
 from Controllers.customer_controller import get_all_customers, get_customer_by_id
 from Data.Models.company_customer import CompanyCustomer
 from Data.Models.customer import Customer
+from Data.Models.customer_cars import CustomerCar
 from Data.Models.private_customers import PrivateCustomer
 import Controllers.customer_controller as cc
 
 ERROR_MESSAGE_ONE = "There is no entry in the database "
 ERROR_MESSAGE_TWO = " Your type of input is wrong "
+
+
+def delete_message(success):
+    print("Delete successful!".center(30, "-")) if success else print("Delete failed".center(30, "-"))
 
 
 def manipulation_data(customer):
@@ -20,7 +25,8 @@ def manipulation_data(customer):
         if selection == "1":
             pass
         if selection == "2":
-            cc.delete_customer(customer)
+            print(delete_message(cc.delete_customer(customer)))
+            continue
         if selection == "3":
             pass
         if selection == "4":
@@ -74,7 +80,7 @@ def add_customer_car():
     print("Customer car information".center(30, " "))
     print("".center(30, "="))
 
-    return {f"customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["Car brand", "Car model", "Car model_year", "Car color"]}
+    return {f"customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["Registration nr", "Car brand", "Car model", "Car model_year", "Car color"]}
 
 
 def add_private_customer(customer_type, order=False):
@@ -96,6 +102,8 @@ def add_private_customer(customer_type, order=False):
         if verification == "1":
             private_customer = PrivateCustomer(**priv_customer_dict)
             private_customer.customer = Customer(customer_type=customer_type)
+            private_customer.customer.cars.append(CustomerCar(**customer_car_dict))
+
             if order:
                 return private_customer
             else:
@@ -129,6 +137,7 @@ def add_company_customer(customer_type, order=False):
         if verification == "1":
             company_customer = CompanyCustomer(**comp_customer_dict)
             company_customer.customer = Customer(customer_type=customer_type)
+            company_customer.customer.cars.append(CustomerCar(**customer_car_dict))
             if order:
                 return company_customer
             else:
