@@ -24,3 +24,17 @@ def delete_product(product):
         session.rollback()
     finally:
         return success
+
+def update_product(product : SparePart, attribute, new_value):
+    success = False
+    try:
+        for attr, value in vars(product).items():
+            if attr == attribute:
+                product.__setattr__(attr, new_value)
+        session.commit()
+        success = True
+    except:
+        session.rollback()
+    finally:
+        return success
+

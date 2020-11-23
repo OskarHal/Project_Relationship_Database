@@ -1,5 +1,5 @@
 from Controllers.product_controller import get_product_by_product_nr, delete_product, \
-    get_products_by_product_description_pattern
+    get_products_by_product_description_pattern, update_product
 from Data.Models.spare_parts import SparePart
 
 """
@@ -10,6 +10,46 @@ def show_menu(name, choices):
         print(f"{i}. {choice}")
     print("0.Exit")
 """
+
+
+def edit_menu(product):
+    choice_dict = {
+        1: "product_nr",
+        2: "description",
+        3: "purchase_price",
+        4: "selling_price",
+        5: "reorder_level",
+        6: "order_quantity",
+        7: "estimated_time_of_arrival",
+        8: "manufacturer_id"
+    }
+
+    while True:
+        print("Edit Menu")
+        print("==============")
+        print("1. Product nr")
+        print("2. Description")
+        print("3. Purchase price")
+        print("4. Selling price")
+        print("5. Reorder level")
+        print("6. Order quantity")
+        print("7. Estimated time of arrival")
+        print("8. manufacturer id")
+        print("9. Supplier id")
+        print("0.Exit")
+
+        menu_selection = int(input("> "))
+
+        new_value = input("> Enter new data")
+
+        if update_product(product=product, attribute=choice_dict[menu_selection], new_value=new_value):
+            print("changes succeeded")
+            print(product.print_all_information_with_relationships())
+        else:
+            print("Failed")
+
+        print("\n")
+
 
 def product_menu():
     while True:
@@ -31,7 +71,7 @@ def product_menu():
             search_products_by_description_pattern()
 
         elif selection == "3":
-            search_products_by_description_pattern()
+            pass
         elif selection == "0":
             break
 
@@ -49,7 +89,7 @@ def choose_action_for_product_menu(product):
         if selection == "1":
             product.print_all_information_with_relationships()
         if selection == "2":
-            pass
+            edit_menu(product)
         if selection == "3":
             print_delete_message(delete_product(product))
             product_menu()
@@ -66,7 +106,7 @@ def add_product(product: SparePart):
 
 
 def select_product_by_number():
-    user_input = input_int_validation()
+    user_input = input_int_validation(message="Type product number")
     product = get_product_by_product_nr(str(user_input))
 
     if product is None:
@@ -86,10 +126,10 @@ def search_products_by_description_pattern():
             print(f'{key}. {product}')
 
 
-def input_int_validation():
+def input_int_validation(message):
     while True:
         try:
-            user_input = int(input("Type product number:\n>"))
+            user_input = int(input(f"{message}:\n>"))
             return user_input
         except ValueError:
             print("You did not write an integer! Try again or type 0 to quit.")
