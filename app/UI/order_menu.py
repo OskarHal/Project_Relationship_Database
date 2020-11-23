@@ -37,41 +37,49 @@ def order_by_date_print(order_date):
     print("")
 
 
-def get_order_details(customer_id):
+def get_order_details(existing=False):
     employee_id = int(input("Enter your employee number: "))
     store_id = int(input("Enter your store id"))
-    new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
-    return new_order
+
+    if existing:
+        customer_id = input("Enter customer_id: ")
+        new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
+        return new_order
+    else:
+        new_order = Order(employee_id=employee_id, store_id=store_id)
+        return new_order
 
 
+#lägga till flera produkter
 def get_product_in_order(new_order):
     while True:
-        print("what product and how many?")
-        sparepart_id = input("Enter product nr: ")
-        quantity = input("Enter how many of said product: ")
-        line = OrderDetail(spare_part_id=sparepart_id, quantity=quantity)
+        print("what product and how many? Enter 'done' to complete")
+        spare_part_id = input("Enter product id: ")
+        if spare_part_id.lower() == "done":
+            break
+        quantity = input("How many of said product: ")
+        line = OrderDetail(spare_part_id=spare_part_id, quantity=quantity)
         new_order.order_lines.append(line)
-        print(new_order)
-        break
     return new_order
 
 
 def create_new_order(customer_type):
     if customer_type == "1":
-        #customer_id = select_customer_menu()
-        new_order = get_order_details(1)
+        new_order = get_order_details(existing=True)
         get_product_in_order(new_order)
         create_order(new_order)
     elif customer_type == "2":
-        #customer_id = add_private_customer(order=True)
-        new_order = get_order_details(1)
-        prod_details = get_product_in_order(new_order.order_id)
-        create_order(new_order, prod_details)
+        new_order = get_order_details()
+        customer = add_private_customer(1, order=True)
+        new_order.customer = customer.customer
+        get_product_in_order(new_order)
+        create_order(new_order)
     elif customer_type == "3":
-        #customer_id = add_company_customer(order=True)
-        new_order = get_order_details(1)
-        prod_details = get_product_in_order(new_order.order_id)
-        create_order(new_order, prod_details)
+        new_order = get_order_details()
+        customer = add_company_customer(2, order=True)
+        new_order.customer = customer.customer
+        get_product_in_order(new_order)
+        create_order(new_order)
     else:
         print("No such option exists. Try again")
 
@@ -85,7 +93,7 @@ def order_menu():
         selection = input("> ")
 
         if selection == "1":
-            print("1. Search for existing customer")
+            print("1. Use existing customer")
             print("2. Add new Private Customer")
             print("3. Add new Company Customer")
             selection = input("> ")
