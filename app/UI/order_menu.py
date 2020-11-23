@@ -63,7 +63,12 @@ def create_new_order(customer_type):
         get_product_in_order(new_order)
         create_order(new_order)
     elif customer_type == "2":
-        #customer_id = add_customer_menu()
+        #customer_id = add_private_customer(order=True)
+        new_order = get_order_details(1)
+        prod_details = get_product_in_order(new_order.order_id)
+        create_order(new_order, prod_details)
+    elif customer_type == "3":
+        #customer_id = add_company_customer(order=True)
         new_order = get_order_details(1)
         prod_details = get_product_in_order(new_order.order_id)
         create_order(new_order, prod_details)
@@ -81,7 +86,8 @@ def order_menu():
 
         if selection == "1":
             print("1. Search for existing customer")
-            print("2. Add new Customer")
+            print("2. Add new Private Customer")
+            print("3. Add new Company Customer")
             selection = input("> ")
             create_new_order(selection)
         elif selection == "2":
