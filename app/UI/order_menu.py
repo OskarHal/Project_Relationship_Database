@@ -1,6 +1,7 @@
 from Controllers.order_controller import create_order, find_order_by_id, find_order_by_date
 from UI.customer_menu import *
 from Data.Models.orders import Order
+from Data.Models.order_details import OrderDetail
 
 
 def order_id_print(order_id):
@@ -49,7 +50,7 @@ def get_product_in_order(order_id):
         print("what product and how many?")
         product_nr = input("Enter product nr: ")
         quantity = input("Enter how many of said product: ")
-        line = [order_id, product_nr, quantity]
+        line = OrderDetail(order_id, product_nr, quantity)
         product_list.append(line)
         print(product_list)
         break
