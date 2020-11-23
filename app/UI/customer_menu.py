@@ -2,7 +2,7 @@ from Controllers.customer_controller import get_all_customers, get_customer_by_i
 from Data.Models.company_customer import CompanyCustomer
 from Data.Models.customer import Customer
 from Data.Models.private_customers import PrivateCustomer
-from Data.db import session
+import Controllers.customer_controller as cc
 
 ERROR_MESSAGE_ONE = "There is no entry in the database "
 ERROR_MESSAGE_TWO = " Your type of input is wrong "
@@ -70,34 +70,62 @@ def select_customer_menu():
             break
 
 
-def add_private_customer(customer_type):
+def add_private_customer(customer_type, order=False):
     while True:
         print("Private Customer".center(30, " "))
         print("".center(30, "="))
 
         priv_customer_dict = {f"private_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["First name", "Last name", "Phone", "Email"]}
 
-        private_customer = PrivateCustomer(**priv_customer_dict)
-        private_customer.customer = Customer(customer_type=customer_type)
+        print("OBS!".center(30, "-"))
+        print("\n".join(f"{key}: {priv_customer_dict[key]}" for key in priv_customer_dict))
 
-        session.add(private_customer)
-        session.commit()
-        break
+        verification = input("Is the information entered correct?\n(1) YES\n(2) NO\n:>")
+
+        if verification == "1":
+            private_customer = PrivateCustomer(**priv_customer_dict)
+            private_customer.customer = Customer(customer_type=customer_type)
+            if order:
+                return private_customer
+            else:
+                cc.add_private_customer(private_customer)
+                print("Customer saved!".center(30, "-"))
+                break
+        elif verification == "2":
+            print("Save cancelled!".center(30, "-"))
+            break
+        else:
+            print(f"{ERROR_MESSAGE_TWO}. Data wasn't saved!")
+            continue
 
 
-def add_company_customer(customer_type):
+def add_company_customer(customer_type, order=False):
     while True:
         print("Company Customers".center(30, " "))
         print("".center(30, "="))
 
         comp_customer_dict = {f"company_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["Company Name", "Contact first name", "Contact last Name", "Email", "Phone"]}
 
-        company_customer = CompanyCustomer(**comp_customer_dict)
-        company_customer.customer = Customer(customer_type=customer_type)
+        print("OBS!".center(30, "-"))
+        print("\n".join(f"{key}: {comp_customer_dict[key]}" for key in comp_customer_dict))
 
-        session.add(company_customer)
-        session.commit()
-        break
+        verification = input("Is the information entered correct?\n(1) YES\n(2) NO\n:> ")
+
+        if verification == "1":
+            company_customer = CompanyCustomer(**comp_customer_dict)
+            company_customer.customer = Customer(customer_type=customer_type)
+            if order:
+                return company_customer
+            else:
+                cc.add_company_customer(company_customer)
+                print("Customer saved!".center(30, "-"))
+                break
+        elif verification == "2":
+            print("Save cancelled!".center(30, "-"))
+            break
+        else:
+            print(f"{ERROR_MESSAGE_TWO}. Data wasn't saved!")
+            continue
 
 
 def add_customer_menu():
@@ -113,8 +141,8 @@ def add_customer_menu():
             add_private_customer(customer_type)
         elif customer_type == 2:
             add_company_customer(customer_type)
-        elif customer_type not in [1, 2]:
-            print("fel")
+        else:
+            print(f"Customer type {customer_type} doesn't exist. Choose either 1 or 2")
 
 
 def customers_menu():
