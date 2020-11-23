@@ -1,4 +1,5 @@
 from Controllers.order_controller import create_order, find_order_by_id, find_order_by_date
+from Controllers.product_controller import get_all_products
 from UI.customer_menu import *
 from Data.Models.orders import Order
 from Data.Models.order_details import OrderDetail
@@ -37,51 +38,77 @@ def order_by_date_print(order_date):
     print("")
 
 
-def get_order_details(customer_id):
+def get_order_details(existing=False):
+    print("===================")
     employee_id = int(input("Enter your employee number: "))
     store_id = int(input("Enter your store id"))
-    new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
-    return new_order
+
+    if existing:
+        customer_id = input("Enter customer_id: ")
+        new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
+        return new_order
+    else:
+        new_order = Order(employee_id=employee_id, store_id=store_id)
+        return new_order
 
 
+#lägga till flera produkter
 def get_product_in_order(new_order):
+    print(f"Products".center(45, '#'))
+    products = get_all_products()
+    for product in products:
+        #print(f'Product ID: {product.spare_part_id}, Description: {product.description}')
+        print(f"Id: ".ljust(30), end='|')
+        print(f"{product.spare_part_id}")
+        print(f"Description: ".ljust(30), end='|')
+        print(f"{product.description}")
+        print(f"".center(45, '-'))
+    print()
     while True:
-        print("what product and how many?")
-        sparepart_id = input("Enter product nr: ")
-        quantity = input("Enter how many of said product: ")
-        line = OrderDetail(spare_part_id=sparepart_id, quantity=quantity)
+        print("What product id? Enter 'done' to complete the order.")
+        spare_part_id = input("Enter product id: ")
+        if spare_part_id.lower() == "done":
+            break
+        quantity = input("How many of said product: ")
+        line = OrderDetail(spare_part_id=spare_part_id, quantity=quantity)
         new_order.order_lines.append(line)
-        print(new_order)
-        break
     return new_order
 
 
 def create_new_order(customer_type):
     if customer_type == "1":
-        #customer_id = select_customer_menu()
-        new_order = get_order_details(1)
+        new_order = get_order_details(existing=True)
         get_product_in_order(new_order)
         create_order(new_order)
     elif customer_type == "2":
-        #customer_id = add_customer_menu()
-        new_order = get_order_details(1)
-        prod_details = get_product_in_order(new_order.order_id)
-        create_order(new_order, prod_details)
+        new_order = get_order_details()
+        customer = add_private_customer(1, order=True)
+        new_order.customer = customer.customer
+        get_product_in_order(new_order)
+        create_order(new_order)
+    elif customer_type == "3":
+        new_order = get_order_details()
+        customer = add_company_customer(2, order=True)
+        new_order.customer = customer.customer
+        get_product_in_order(new_order)
+        create_order(new_order)
     else:
         print("No such option exists. Try again")
 
 
 def order_menu():
     while True:
+        print("===================")
         print("1. Create order")
         print("2. Find order by id")
         print("3. Find order by date")
         print("0. Exit")
         selection = input("> ")
-
+        print()
         if selection == "1":
-            print("1. Search for existing customer")
-            print("2. Add new Customer")
+            print("1. Use existing customer")
+            print("2. Add new Private Customer")
+            print("3. Add new Company Customer")
             selection = input("> ")
             create_new_order(selection)
         elif selection == "2":
