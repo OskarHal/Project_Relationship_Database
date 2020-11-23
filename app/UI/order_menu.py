@@ -44,34 +44,24 @@ def get_order_details(customer_id):
     return new_order
 
 
-def get_product_in_order(order_id):
+def get_product_in_order(new_order):
     while True:
-        product_list = []
         print("what product and how many?")
-        product_nr = input("Enter product nr: ")
+        sparepart_id = input("Enter product nr: ")
         quantity = input("Enter how many of said product: ")
-        line = OrderDetail(order_id, product_nr, quantity)
-        product_list.append(line)
-        print(product_list)
+        line = OrderDetail(spare_part_id=sparepart_id, quantity=quantity)
+        new_order.order_lines.append(line)
+        print(new_order)
         break
-    return product_list
-
-
-"""
-Problem med att få ut order_id från den ny skapade ordern, hur tusan skall det lösas?
-finns det något bra sätt att få med det med tanke på att den är auto_increment 
-så skapas den ju när det läggs in i databasen. 
-Går det på något sätt få skapa ordern först, för att få ut senaste order_id't och skicka med den till order_details?
-
-"""
+    return new_order
 
 
 def create_new_order(customer_type):
     if customer_type == "1":
         #customer_id = select_customer_menu()
         new_order = get_order_details(1)
-        prod_details = get_product_in_order(new_order.order_id)
-        create_order(new_order, prod_details)
+        get_product_in_order(new_order)
+        create_order(new_order)
     elif customer_type == "2":
         #customer_id = add_customer_menu()
         new_order = get_order_details(1)
