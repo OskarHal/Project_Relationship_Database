@@ -5,3 +5,7 @@ from Data.db import session
 def get_company_customer():
     return session.query(CompanyCustomer).all()
 
+
+def add_company_customer(customer):
+    session.add(customer)
+    session.commit()
