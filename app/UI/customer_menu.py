@@ -4,12 +4,39 @@ from Data.Models.customer import Customer
 from Data.Models.private_customers import PrivateCustomer
 import Controllers.customer_controller as cc
 
+
 ERROR_MESSAGE_ONE = "There is no entry in the database "
 ERROR_MESSAGE_TWO = " Your type of input is wrong "
 
 
+def edit_data(customer):
+    while True:
+        print("Choose the edit")
+        print("==============")
+        print("1.Edit E-mail")
+        print("2.Edit Phone number")
+        print("0.Exit")
+        selection = input("> ")
+        if selection == "1":
+            edit_email = input("> Enter new email: ")
+            cc.edit_new_email(customer, edit_email)
+            print("==============")
+            print(f"The email is now updated to {edit_email}")
+            print("==============")
+            break
+        if selection == "2":
+            edit_phone_number = input("> Enter new phone number: ")
+            cc.edit_new_phone_number(customer, edit_phone_number)
+            print("==============")
+            print(f"The phone number is now updated to {edit_phone_number}")
+            print("==============")
+        if selection == "0":
+            break
+
 def manipulation_data(customer):
     while True:
+        print("Edit menu")
+        print("==============")
         print("Select what you want to do?")
         print("1.Edit")
         print("2.Delete")
@@ -18,7 +45,7 @@ def manipulation_data(customer):
         print("0.Exit")
         selection = input("> ")
         if selection == "1":
-            pass
+            edit_data(customer)
         if selection == "2":
             pass
         if selection == "3":
@@ -31,11 +58,13 @@ def manipulation_data(customer):
 
 def select_customer_menu():
     while True:
+        print("Customers Menu")
+        print("==============")
         print("Find Customer by:")
+        print("==============")
         print("1.ID")
         print("2.First name (Private Customer)")
         print("3.Company name")
-        print("4.Registration Number")
         print("0.Exit")
         selection = input("> ")
         if selection == "1":
@@ -59,13 +88,16 @@ def select_customer_menu():
 
             else:
                 print(ERROR_MESSAGE_ONE + "with customer id " + selected_id)
-
         if selection == "2":
-            pass
+            selected_first_name = input("> Enter First name").lower()
+            customer = cc.get_customer_by_first_name(selected_first_name)
+            print(customer)
+            manipulation_data(customer)
         if selection == "3":
-            pass
-        if selection == "4":
-            pass
+            selected_company_name = input("> Enter Company name")
+            customer = cc.get_customer_by_company_name(selected_company_name)
+            print(customer)
+            manipulation_data(customer)
         if selection == "0":
             break
 
