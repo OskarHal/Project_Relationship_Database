@@ -12,7 +12,5 @@ def get_customer_by_id(selected_id):
     return pcr.get_customer_by_id(selected_id)
 
 
-
-
-
-
+def add_private_customer(customer):
+    return pcr.add_private_customer(customer)
