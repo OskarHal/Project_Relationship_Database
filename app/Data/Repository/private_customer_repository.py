@@ -12,4 +12,5 @@ def get_customer_by_id(selected_id):
 
 
 def add_private_customer(customer):
-    return PrivateCustomer(**customer)
+    session.add(customer)
+    session.commit()
