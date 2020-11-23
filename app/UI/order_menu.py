@@ -1,4 +1,5 @@
 from Controllers.order_controller import create_order, find_order_by_id, find_order_by_date
+from Controllers.product_controller import get_all_products
 from UI.customer_menu import *
 from Data.Models.orders import Order
 from Data.Models.order_details import OrderDetail
@@ -38,6 +39,7 @@ def order_by_date_print(order_date):
 
 
 def get_order_details(existing=False):
+    print("===================")
     employee_id = int(input("Enter your employee number: "))
     store_id = int(input("Enter your store id"))
 
@@ -52,8 +54,18 @@ def get_order_details(existing=False):
 
 #lägga till flera produkter
 def get_product_in_order(new_order):
+    print(f"Products".center(45, '#'))
+    products = get_all_products()
+    for product in products:
+        #print(f'Product ID: {product.spare_part_id}, Description: {product.description}')
+        print(f"Id: ".ljust(30), end='|')
+        print(f"{product.spare_part_id}")
+        print(f"Description: ".ljust(30), end='|')
+        print(f"{product.description}")
+        print(f"".center(45, '-'))
+    print()
     while True:
-        print("what product and how many? Enter 'done' to complete the order.")
+        print("What product id? Enter 'done' to complete the order.")
         spare_part_id = input("Enter product id: ")
         if spare_part_id.lower() == "done":
             break
@@ -86,12 +98,13 @@ def create_new_order(customer_type):
 
 def order_menu():
     while True:
+        print("===================")
         print("1. Create order")
         print("2. Find order by id")
         print("3. Find order by date")
         print("0. Exit")
         selection = input("> ")
-
+        print()
         if selection == "1":
             print("1. Use existing customer")
             print("2. Add new Private Customer")
