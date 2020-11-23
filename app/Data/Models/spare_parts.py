@@ -20,6 +20,7 @@ class SparePart(Base):
     supplier = relationship("Supplier", back_populates="spare_parts")
     stores = relationship("SparePartStore", back_populates="spare_part", cascade="all, delete")
     car_models = relationship("CarModel", secondary=car_models_spare_parts, back_populates="spare_parts")
+    order_detail = relationship("OrderDetail", back_populates="spare_part")
 
     def __repr__(self):
         return f'SparePart(spare_part_id={self.spare_part_id},' \

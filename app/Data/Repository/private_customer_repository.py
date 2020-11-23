@@ -10,3 +10,7 @@ def get_private_customer():
 def get_customer_by_id(selected_id):
     return session.query(Customer).filter_by(customer_id=int(selected_id)).first()
 
+
+def add_private_customer(customer):
+    session.add(customer)
+    session.commit()
