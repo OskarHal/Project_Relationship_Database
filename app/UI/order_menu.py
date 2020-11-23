@@ -53,7 +53,7 @@ def get_order_details(existing=False):
 #lägga till flera produkter
 def get_product_in_order(new_order):
     while True:
-        print("what product and how many? Enter 'done' to complete")
+        print("what product and how many? Enter 'done' to complete the order.")
         spare_part_id = input("Enter product id: ")
         if spare_part_id.lower() == "done":
             break
