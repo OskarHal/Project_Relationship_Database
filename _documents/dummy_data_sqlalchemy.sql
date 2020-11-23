@@ -80,7 +80,7 @@ VALUES
 
 INSERT INTO company_customers
 (customer_id,
-company_customer_name,
+company_customer_company_name,
 company_customer_first_name,
 company_customer_last_name,
 company_customer_phone,
