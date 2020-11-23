@@ -2,15 +2,6 @@ from Controllers.product_controller import get_product_by_product_nr, delete_pro
     get_products_by_product_description_pattern, update_product
 from Data.Models.spare_parts import SparePart
 
-"""
-def show_menu(name, choices):
-    print(f"{name} Menu")
-    print("==============")
-    for i, choice in enumerate(choices):
-        print(f"{i}. {choice}")
-    print("0.Exit")
-"""
-
 
 def edit_menu(product):
     choice_dict = {
@@ -24,26 +15,23 @@ def edit_menu(product):
         8: "manufacturer_id"
     }
 
+     # for {i + 1: product_attribute for i in enumerate(vars(product).keys())}:
+
+    #   choice_dict[product_attribute] =
+
     while True:
-        print("Edit Menu")
-        print("==============")
-        print("1. Product nr")
-        print("2. Description")
-        print("3. Purchase price")
-        print("4. Selling price")
-        print("5. Reorder level")
-        print("6. Order quantity")
-        print("7. Estimated time of arrival")
-        print("8. manufacturer id")
-        print("9. Supplier id")
-        print("0.Exit")
+        for key, value in choice_dict.items():
+            print(f"{key}. {str(value).capitalize().replace('_', ' ')}")
 
         menu_selection = int(input("> "))
 
-        new_value = input("> Enter new data")
+        if menu_selection == 0:
+            break
 
-        if update_product(product=product, attribute=choice_dict[menu_selection], new_value=new_value):
-            print("changes succeeded")
+        new_value = input("> Enter new data: ")
+
+        if update_product(product=product, attribute_name=choice_dict[menu_selection], new_value=new_value):
+            print("Changes succeeded")
             print(product.print_all_information_with_relationships())
         else:
             print("Failed")

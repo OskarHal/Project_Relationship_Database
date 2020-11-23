@@ -19,5 +19,5 @@ def delete_product(product) -> bool:
     return pr.delete_product(product)
 
 
-def update_product(product, attribute, new_value):
-    return pr.update_product(product, attribute, new_value)
+def update_product(product, attribute_name, new_value):
+    return pr.update_product(product=product, attribute_name=attribute_name, new_value=new_value)
