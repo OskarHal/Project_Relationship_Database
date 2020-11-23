@@ -1,76 +1,107 @@
-from Controllers.product_controller import get_all_products, get_product_by_product_nr
+from Controllers.product_controller import get_product_by_product_nr, delete_product, \
+    get_products_by_product_description_pattern
 from Data.Models.spare_parts import SparePart
-from Data.Repository.products_repository import get_product_by_product_description
 
+"""
+def show_menu(name, choices):
+    print(f"{name} Menu")
+    print("==============")
+    for i, choice in enumerate(choices):
+        print(f"{i}. {choice}")
+    print("0.Exit")
+"""
 
-def select_product_menu():
+def product_menu():
     while True:
-        print("Select product by: ")
-        print("1. Product number")
-        print("2. Name")
+        print("Product Menu")
+        print("==============")
+        print("1. Select product by product number")
+        print("2. Search for products by description")
+        print("3. Add product")
         print("0.Exit")
 
         selection = input("> ")
 
         if selection == "1":
-            product_nr = input("Type product number:\n>")
-            product = get_product_by_product_nr(product_nr)
-            
-            if product is None:
-                print("No product with that number:\n>")
-                continue
-
-            print(f"Product number {product.product_nr}".center(45, '#'))
-            print((30 + len("Information")) * "-")
-            print('Category'.ljust(30), end="|")
-            print("Information")
-            print((30 + len("Information")) * "-")
-            print(f"Description: ".ljust(30), end='|')
-            print(f"{product.description}")
-            print(f"Purchase price ".ljust(30), end='|')
-            print(f"{product.purchase_price}")
-            print(f"Selling price".ljust(30), end='|')
-            print(f"{product.selling_price}")
-            print(f"Reorder level".ljust(30), end='|')
-            print(f"{product.reorder_level}")
-            print(f"Order quantity".ljust(30), end='|')
-            print(f"{product.order_quantity}")
-            print(f"Estimated time of arrival".ljust(30), end='|')
-            print(f"{product.estimated_time_of_arrival}")
-            print(f"Manufacturer".ljust(30), end='|')
-            print(f"{product.manufacturer.manufacturer_name}")
-            print(f"Supplier".ljust(30), end='|')
-            print(f"{product.supplier.supplier_name}")
-            print((30 + len("Information")) * "-")
-            print("Availability".center(60))
-            print((60 + len("Availability")) * "-")
-            print('Store'.ljust(30), end="")
-            print("Store location".ljust(30), end="")
-            print("Stock")
-            print((60 + len("Availability")) * "-")
-
-            for stores_parts in product.stores:
-                print(stores_parts.store.store_name.ljust(30), end="")
-                print(stores_parts.stock_location.ljust(30), end="")
-                print(f"{stores_parts.stock} items")
+            product_choice = select_product_by_number()
+            if product_choice is not None:
+                choose_action_for_product_menu(product_choice)
 
         elif selection == "2":
-            description = input("Type product description: ")
-            products = get_product_by_product_description(description_pattern=description)
-            for product in products:
-                print(product)
+            search_products_by_description_pattern()
+
+        elif selection == "3":
+            search_products_by_description_pattern()
         elif selection == "0":
             break
 
         print("\n")
 
 
-def product_menu():
+def choose_action_for_product_menu(product):
     while True:
-        print("Product Menu")
-        print("==============")
-        print("1. Select product")
-        print("0.Exit")
+        print("Select what you want to do?")
+        print("1. Show all information")
+        print("2. Edit")
+        print("3. Delete")
+        print("0. Exit")
         selection = input("> ")
         if selection == "1":
-            select_product_menu()
+            product.print_all_information_with_relationships()
+        if selection == "2":
+            pass
+        if selection == "3":
+            print_delete_message(delete_product(product))
+            product_menu()
+        if selection == "0":
+            break
+
+
+def edit_product(product: SparePart):
+    pass
+
+
+def add_product(product: SparePart):
+    pass
+
+
+def select_product_by_number():
+    user_input = input_int_validation()
+    product = get_product_by_product_nr(str(user_input))
+
+    if product is None:
+        print_result_message_no_match_nr(category="product", user_input=user_input)
+    else:
+        return product
+
+
+def search_products_by_description_pattern():
+    user_input = input("Type product description: ")
+    products = get_products_by_product_description_pattern(description_pattern=user_input)
+
+    if len(products) < 1:
+        print_result_message_no_match_nr(category="products", user_input=user_input)
+    else:
+        for key, product in products.items():
+            print(f'{key}. {product}')
+
+
+def input_int_validation():
+    while True:
+        try:
+            user_input = int(input("Type product number:\n>"))
+            return user_input
+        except ValueError:
+            print("You did not write an integer! Try again or type 0 to quit.")
+
+
+def print_result_message_no_match_str(category, user_input):
+    print(f"There is no {category} that includes keyword '{user_input}'")
+
+
+def print_result_message_no_match_nr(category, user_input):
+    print(f"There is no {category} with nr {user_input}")
+
+
+def print_delete_message(success):
+    print("Delete succeeded") if success else print("Delete failed")
