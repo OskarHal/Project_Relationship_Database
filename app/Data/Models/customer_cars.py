@@ -5,7 +5,7 @@ from Data.db import Base
 
 class CustomerCar(Base):
     __tablename__ = 'customer_cars'
-    registration_nr = sa.Column(sa.String(45), primary_key=True, autoincrement=False)
+    customer_registration_nr = sa.Column(sa.String(45), primary_key=True, autoincrement=False)
     customer_car_brand = sa.Column(sa.String(45), nullable=False)
     customer_car_model = sa.Column(sa.String(45), nullable=False)
     customer_car_model_year = sa.Column(sa.Integer, nullable=False)
@@ -14,7 +14,7 @@ class CustomerCar(Base):
     owner = relationship("Customer", back_populates="cars")
 
     def __repr__(self):
-        return f'Registration number={self.registration_nr}, ' \
+        return f'Registration number={self.customer_registration_nr}, ' \
                f'Car brand={self.customer_car_brand}, ' \
                f'Car Model={self.customer_car_model},' \
                f'Model year={self.customer_car_model_year}, ' \
