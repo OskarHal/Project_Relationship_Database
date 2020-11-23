@@ -26,3 +26,18 @@ def delete_customer(customer):
         session.rollback()
     finally:
         return success
+
+
+def get_customer_by_first_name(selected_first_name):
+    return session.query(PrivateCustomer).filter_by(private_customer_first_name=selected_first_name).first()
+
+
+def edit_new_email(customer, edit_email):
+    customer.private_customer_email = edit_email
+    session.commit()
+
+
+def edit_new_phone_number(customer, edit_phone_number):
+    customer.private_customer_phone = edit_phone_number
+    session.commit()
+
