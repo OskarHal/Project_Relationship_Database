@@ -2,7 +2,7 @@ from Data.Models.spare_parts import SparePart
 from Data.Repository import products_repository as pr
 
 
-def get_all_products() -> None:
+def get_all_products() -> list:
     return pr.get_all_products()
 
 
