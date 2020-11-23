@@ -66,15 +66,39 @@ Igår gjorde vi klart alla modeller och gick igenom tillsammans. Idag ska vi tes
 
 Lektionsdag, Oskar och Oscar skapar en indelning för mapparna. Anderas och Astrid går igenom CASCADE m.m i SQLAlchemy modellerna, Anderas uppdaterat relationer i Modellerna.
 
-2020-11-18 
+2020-11-19 
 
 - Löser lite buggar med repern tilsammans. Fortsätter med Alembic och migrations.
 - Kvar att göra är menyn, repo, controllers, lägga i mer data. Delar upp arbetet med menyn. Börjar med menyn. 
 
 
 
+2020-11-20
+
+Går igenom hur vi ska strukturera menyerna. Gör ett gemensamt dokument för att sen dela in arbetsuppgifterna.
+
+Andreas & Astrid jobbar med kundmeny
+
+Oscar & Onkar jobbar med produktmeny.
 
 
 
+2020-11-21
 
+Andreas & Astrid satt under lördagen och gick igenom customer menyn lite mer.
+La till lite funktionallitet och tänkte över upplägget.
+
+
+
+2020-11-22
+Oscar satt med order menyn, för att kunna skapa en order. Löste det mesta förutom customer/order-id
+
+
+2020-11-23
+Oscar fick med hjälp av Andreas ihop order funktionen, nu går det att skapa en ny kund i orderskapandet,
+samt att det skapas rader i order_details relaterade till ordern och vilka produkter man väljer.
+
+Astrid sitter med editering av kund data.
+
+Oskar sitter med produktmenyn och kollar på att radera från databasen. (stötte på cascade patrull)
 

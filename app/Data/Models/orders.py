@@ -14,8 +14,7 @@ class Order(Base):
     customer = relationship("Customer", back_populates="orders")
     employees = relationship("Employee", back_populates="orders")
     store = relationship("Store", back_populates="orders")
-    spare_parts = relationship("OrderDetail")
-
+    order_lines = relationship("OrderDetail", back_populates="order")
 
     def __repr__(self):
         return f'Order(OrderId={self.order_id}, ' \
