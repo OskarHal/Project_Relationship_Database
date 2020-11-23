@@ -2,10 +2,8 @@ from Data.db import session
 from Data.Models.orders import Order
 
 
-def create_order(new_order, prod_details):
+def create_order(new_order):
     session.add(new_order)
-    for detail in prod_details:
-        session.add(detail)
     session.commit()
 
 
