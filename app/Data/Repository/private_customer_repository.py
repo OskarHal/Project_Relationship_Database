@@ -14,3 +14,8 @@ def get_customer_by_id(selected_id):
 def add_private_customer(customer):
     session.add(customer)
     session.commit()
+
+
+def delete_customer(customer):
+    session.query(Customer).filter(Customer.customer_id == customer[0].customer_id).delete()
+    session.commit()

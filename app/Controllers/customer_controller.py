@@ -18,3 +18,10 @@ def add_private_customer(customer):
 
 def add_company_customer(customer):
     ccr.add_company_customer(customer)
+
+
+def delete_customer(customer):
+    if customer[0].customer.customer_type == 1:
+        pcr.delete_customer(customer)
+    elif customer[0].customer.customer_type == 2:
+        ccr.delete_customer(customer)

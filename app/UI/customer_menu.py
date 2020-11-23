@@ -20,7 +20,7 @@ def manipulation_data(customer):
         if selection == "1":
             pass
         if selection == "2":
-            pass
+            cc.delete_customer(customer)
         if selection == "3":
             pass
         if selection == "4":
@@ -48,12 +48,12 @@ def select_customer_menu():
             customer = get_customer_by_id(selected_id)
             if customer:
                 if customer.customer_type == 1:
-                    private_customer = customer.priv_customer[0]
+                    private_customer = customer.priv_customer
                     print(private_customer)
                     manipulation_data(private_customer)
 
                 elif customer.customer_type == 2:
-                    company_customer = customer.comp_customer[0]
+                    company_customer = customer.comp_customer
                     print(company_customer)
                     manipulation_data(company_customer)
 
