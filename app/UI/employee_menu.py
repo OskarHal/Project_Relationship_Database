@@ -7,7 +7,7 @@ def fire_employee(employee):
     print("=" * 30)
     print("1. The smell is unbearable")
     print("2. Nobody likes him")
-    print("3. Your not a fan if Star Wars")
+    print("3. Your not a fan of Star Wars")
 
     input_int_validation(message="Thread carefully, your carisma lvl is low!")
 
