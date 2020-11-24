@@ -12,3 +12,11 @@ class SparePartStore(Base):
     spare_part = relationship('SparePart', back_populates="stores")
     store = relationship('Store', back_populates="spare_parts")
 
+
+    def __repr__(self):
+        return f'SparePartStore(spare_part_id={self.store_id},' \
+               f'Spare part id={self.spare_part_id}, ' \
+               f'Stock={self.stock}, ' \
+               f'Stock location={self.stock_location}, ' \
+               f'spare_part={self.spare_part} ' \
+               f'store={self.store} ' \

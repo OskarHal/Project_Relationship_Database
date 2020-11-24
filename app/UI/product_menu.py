@@ -1,35 +1,98 @@
-from copy import copy
-from datetime import date, datetime
+import os
 
 from Controllers.product_controller import get_product_by_product_nr, delete_product, \
-    get_products_by_product_description_pattern, update_product, add_product
+    get_products_by_product_description_pattern, update_product, add_product, \
+    get_manufacturer_by_id, get_supplier_by_id, get_all_car_models
+
+from Data.Models.spare_part_stores import SparePartStore
 from Data.Models.spare_parts import SparePart
 
 
+def add_existing_car_models():
+    chosen_car_models = []
+    available_car_models = get_all_car_models()
+    available_car_models_id = []
+
+    while True:
+        print(f"Possible car models to add".center(50, "-"))
+        for car_model in available_car_models:
+            print(car_model)
+            available_car_models_id.append(car_model.car_model_id)
+
+        chosen_car_model_id = input_int_validation("car model id: ")
+        car_model = [cm for cm in available_car_models if cm.car_model_id == chosen_car_model_id]
+
+        if not car_model:
+            print("There are no car models to choose from with that id!")
+            continue
+        else:
+            car_model = car_model[0]
+            chosen_car_models.append(car_model)
+            available_car_models.remove(car_model)
+
+        if not available_car_models:
+            print("no more car models to add")
+            break
+
+        if user_question_add_more("Want to add more car models?"):
+            break
+
+        print(f"Added cars".center(50, "-"))
+        [print(f"{car_model}") for car_model in chosen_car_models]
+        print("\n")
+
+    return chosen_car_models
+
+
+def add_manufacturer():
+    return get_manufacturer_by_id(manufacturer_id=input_int_validation("manufacturer id: "))
+
+
+def add_supplier():
+    return get_supplier_by_id(supplier_id=input_int_validation("Supplier id: "))
+
+
+def add_spare_part_stores():
+    new_spare_part_stores = []
+
+    while True:
+        new_spare_part_store_dict = {f"{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
+                                     ["Stock", "Stock location", "Store id"]}
+
+        new_spare_part_stores.append(SparePartStore(**new_spare_part_store_dict))
+
+        answer = input("Want to add product to more stores? (yes or no): ").lower()
+        if answer == "no":
+            break
+
+    return new_spare_part_stores
+
 
 def add_product_interface():
-    product_nr = input("Add product nr: ")
-    description = input("Add description ")
-    purchase_price = float(input("Add purchase price: "))
-    selling_price = float(input("Add selling price: "))
-    reorder_level = int(input("Add reorder level: "))
-    order_quantity = int(input("Add order quantity: "))
-    # estimated_time_of_arrival = int(input("Add estimated time of arrival: "))
+    add_product_dict = {f"{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
+                        [
+                            "Product nr",
+                            "Description",
+                            "Purchase price",
+                            "Selling price",
+                            "Reorder level",
+                            "Order quantity",
+                            "Estimated time of arrival"
+                        ]}
 
-    manufacturer_id = int(input("Add manufacturer id: "))
-    supplier_id = int(input("Add supplier id: "))
+    new_product = SparePart(**add_product_dict)
+    new_product.manufacturer, new_product.supplier = add_manufacturer(), add_supplier()
+    [new_product.car_models.append(car_model) for car_model in add_existing_car_models()]
+    [new_product.stores.append(store) for store in add_spare_part_stores()]
 
-    new_product = SparePart(product_nr=product_nr,
-                            description=description,
-                            purchase_price=purchase_price,
-                            selling_price=selling_price,
-                            reorder_level=reorder_level,
-                            order_quantity=order_quantity,
-                            manufacturer_id=manufacturer_id,
-                            supplier_id=supplier_id)
+    if add_product(new_product):
+        print(f"You successfully added a product to the database!".center(45, "-"))
+        print(new_product.print_all_information_with_relationships())
+        os.system("pause")
+    else:
+        print("Something went wrong")
+        os.system("pause")
 
-    print(new_product)
-    add_product(new_product)
 
 def product_menu():
     while True:
@@ -88,25 +151,14 @@ def choose_action_for_product_menu(product):
 
 
 def edit_menu(product):
-    # choice_dict = {i: value for i, value in enumerate(vars(product).keys())}
-    # choice_dict[0] = "Exit"
-
-    print("Edit menu")
-    print("==============")
-    print("Choose an attribute to edit: ")
-
-    choice_dict = {
-        1: "product_nr",
-        2: "description",
-        3: "purchase_price",
-        4: "selling_price",
-        5: "reorder_level",
-        6: "order_quantity",
-        7: "estimated_time_of_arrival",
-        0: "Exit"
-    }
+    choice_dict = {i: value for i, value in enumerate(vars(product).keys()) if i != 0}
+    choice_dict[0] = "Exit"
 
     while True:
+        print("Edit menu")
+        print("==============")
+        print("Choose an attribute to edit: ")
+
         for key, value in choice_dict.items():
             print(f"{key}. {str(value).capitalize().replace('_', ' ')}")
 
@@ -114,8 +166,12 @@ def edit_menu(product):
 
         if menu_selection == 0:
             break
-        else:
-            edit_product_handler(product=product, attribute_name=choice_dict[menu_selection])
+        elif menu_selection > 10:
+            print("choose a number between 1-10")
+            os.system("pause")
+            continue
+
+        edit_product_handler(product=product, attribute_name=choice_dict[menu_selection])
 
         print("\n")
 
@@ -124,7 +180,6 @@ def edit_product_handler(product: SparePart, attribute_name: str):
     new_value = input_int_validation(input_description="Enter new data: ")
     success = update_product(product=product, attribute_name=attribute_name, new_value=new_value)
     print_success_message(success=success, print_function=product.print_all_information_with_relationships)
-
 
 
 def search_products_by_description_pattern():
@@ -139,10 +194,9 @@ def search_products_by_description_pattern():
 
 
 def input_int_validation(input_description):
-    print(input_description)
     while True:
         try:
-            user_input = int(input("> "))
+            user_input = int(input(f"{input_description}: "))
             return user_input
         except ValueError:
             print("You did not write an integer! Try again or type 0 to quit.")
@@ -169,3 +223,19 @@ def print_success_message(*args, success, print_function=None):
                 print(arg)
     else:
         print("Failed")
+
+
+def user_question_add_more(message):
+    magic_number = 0
+    while True:
+        answer = input(f"{message} (yes or no): ").lower()
+        if answer == "no":
+            return True
+        elif answer == "yes":
+            return False
+        else:
+            print("Sorry, I did not understand that!")
+            magic_number += 1
+            if magic_number == 3:
+                print("MARRY CRISTMAS!")
+                os.system("notepad marry_christmas_wish_list.txt")
