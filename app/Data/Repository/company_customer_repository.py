@@ -12,7 +12,7 @@ def add_company_customer(customer):
 
 
 def get_customer_by_company_name(selected_company_name):
-    return session.query(CompanyCustomer).filter_by(company_customer_name=selected_company_name).first()
+    return session.query(CompanyCustomer).filter_by(company_customer_company_name=selected_company_name).first()
 
 
 def edit_new_email(customer, edit_email):

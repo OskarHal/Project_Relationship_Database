@@ -1,17 +1,17 @@
-"""create table orders
+"""Create orders table
 
-Revision ID: 4add503fdd14
-Revises: d4923409e782
-Create Date: 2020-11-17 15:07:09.710487
+Revision ID: dcb39127525b
+Revises: 2d62deb45bbc
+Create Date: 2020-11-24 13:20:28.993652
 
 """
 from alembic import op
 import sqlalchemy as sa
-from datetime import datetime
+
 
 # revision identifiers, used by Alembic.
-revision = '4add503fdd14'
-down_revision = 'd4923409e782'
+revision = 'dcb39127525b'
+down_revision = '2d62deb45bbc'
 branch_labels = None
 depends_on = None
 

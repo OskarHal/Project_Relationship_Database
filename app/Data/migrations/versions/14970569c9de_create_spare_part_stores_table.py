@@ -1,8 +1,8 @@
-"""create association spare_part_stores
+"""Create spare_part_stores table
 
-Revision ID: ff7ee8b9312d
-Revises: 47a60b5d7746
-Create Date: 2020-11-17 15:07:22.025487
+Revision ID: 14970569c9de
+Revises: 0d9cc4ba9229
+Create Date: 2020-11-24 13:21:49.279647
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ff7ee8b9312d'
-down_revision = '47a60b5d7746'
+revision = '14970569c9de'
+down_revision = '0d9cc4ba9229'
 branch_labels = None
 depends_on = None
 
