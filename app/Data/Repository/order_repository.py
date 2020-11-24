@@ -32,6 +32,7 @@ def update_stock(old_stock, quantity):
         session.rollback()
 
 
-def find_diffrent_store(spare_part_id, store_id):
+def find_diffrent_store(spare_part_id, store_id, quantity):
     return session.query(SparePartStore).filter(SparePartStore.spare_part_id.like(f'{spare_part_id}')). \
-        filter(SparePartStore.store_id.notlike(f'{store_id}')).all()
+        filter(SparePartStore.store_id.notlike(f'{store_id}')).\
+        filter(SparePartStore.stock >= quantity).all()
