@@ -69,3 +69,5 @@ class SparePart(Base):
             print(spare_part_store.stock_location.ljust(30), end="")
             print(f"{spare_part_store.stock} items")
 
+        print("\n" * 2)
+
