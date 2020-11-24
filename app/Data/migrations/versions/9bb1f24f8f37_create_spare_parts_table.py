@@ -1,8 +1,8 @@
-"""create table spareparts
+"""Create spare_parts table
 
-Revision ID: b45264bc0b96
-Revises: d248229298a2
-Create Date: 2020-11-17 15:06:37.176470
+Revision ID: 9bb1f24f8f37
+Revises: 654bc648802f
+Create Date: 2020-11-24 13:16:17.174626
 
 """
 from alembic import op
@@ -10,10 +10,11 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b45264bc0b96'
-down_revision = 'd248229298a2'
+revision = '9bb1f24f8f37'
+down_revision = '654bc648802f'
 branch_labels = None
 depends_on = None
+
 
 
 def upgrade():
@@ -34,3 +35,4 @@ def upgrade():
 
 def downgrade():
     op.drop_table('spare_parts')
+
