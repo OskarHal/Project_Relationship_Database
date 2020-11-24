@@ -102,3 +102,7 @@ Astrid sitter med editering av kund data.
 
 Oskar sitter med produktmenyn och kollar på att radera från databasen. (stötte på cascade patrull)
 
+2020-11-24
+
+Känner oss rätt klara och gör lite mer roliga saker som vi kommer att visa upp. 
+Updaterar Alembic så att de fungerar. 
