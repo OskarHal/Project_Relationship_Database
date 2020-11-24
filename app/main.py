@@ -18,8 +18,6 @@ from UI.main_menu import main_menu
 
 def main():
     Base.metadata.create_all(engine)
-    test = session.query(Customer).filter_by(customer_id=1).first()
-    print(test)
     main_menu()
 
     # order_1 = Order(customer_id=1, employee_id=1, store_id=1)

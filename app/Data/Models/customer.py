@@ -17,9 +17,9 @@ class Customer(Base):
     def __repr__(self):
         if self.customer_type == 1:
             return f'Customer ID={self.customer_id}, Private Customer' \
-                   f' Owns cars with registration number: {"".join(car.registration_nr for car in self.cars)}'
+                   f' Owns cars with registration number: {"".join(car.customer_registration_nr for car in self.cars)}'
         else:
             return f'Customer ID={self.customer_id}, Company Customer' \
-                   f' Owns cars with registration number: {"".join(car.registration_nr for car in self.cars)}'
+                   f' Owns cars with registration number: {"".join(car.customer_registration_nr for car in self.cars)}'
 
 

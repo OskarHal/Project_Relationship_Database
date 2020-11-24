@@ -3,8 +3,11 @@ from Data.Models.orders import Order
 
 
 def create_order(new_order):
-    session.add(new_order)
-    session.commit()
+    try:
+        session.add(new_order)
+        session.commit()
+    except:
+        session.rollback()
 
 
 def find_order_by_id(order_id):

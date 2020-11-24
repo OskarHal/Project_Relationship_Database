@@ -100,7 +100,7 @@ VALUES
 
 
 INSERT INTO customer_cars
-(registration_nr,
+(customer_registration_nr,
 customer_id,
 customer_car_brand,
 customer_car_model,
