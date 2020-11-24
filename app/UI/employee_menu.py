@@ -55,6 +55,7 @@ def employee_menu():
         print("=" * 30)
         print("1. Show employees")
         print("2. Select employee") # sök namn eller ID
+        print("3. Add employee")
         print("0. Exit")
 
         selection = input_int_validation(message="Menu selection")
@@ -68,6 +69,8 @@ def employee_menu():
         elif selection == 2:
             select_employee_menu()
             break
+        elif selection == 3:
+            pass # ---> Kör här :D
         elif selection == 0:
             break
 
