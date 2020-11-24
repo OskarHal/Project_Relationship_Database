@@ -25,16 +25,16 @@ def delete_product(product):
     finally:
         return success
 
-def update_product(product : SparePart, attribute, new_value):
+
+def update_product(product: SparePart, attribute_name, new_value):
     success = False
     try:
-        for attr, value in vars(product).items():
-            if attr == attribute:
-                product.__setattr__(attr, new_value)
+        for product_attribute, value in vars(product).items():
+            if product_attribute == attribute_name:
+                product.__setattr__(product_attribute, new_value)
         session.commit()
         success = True
     except:
         session.rollback()
     finally:
         return success
-
