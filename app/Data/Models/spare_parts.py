@@ -20,7 +20,7 @@ class SparePart(Base):
     supplier = relationship("Supplier", back_populates="spare_parts")
     stores = relationship("SparePartStore", back_populates="spare_part", cascade="all, delete")
     car_models = relationship("CarModel", secondary=car_models_spare_parts, back_populates="spare_parts")
-    order_detail = relationship("OrderDetail", back_populates="spare_part")
+    order_detail = relationship("OrderDetail", back_populates="spare_part", cascade="all, delete")
 
     def __repr__(self):
         return f'SparePart(spare_part_id={self.spare_part_id},' \
@@ -68,4 +68,6 @@ class SparePart(Base):
             print(spare_part_store.store.store_name.ljust(30), end="")
             print(spare_part_store.stock_location.ljust(30), end="")
             print(f"{spare_part_store.stock} items")
+
+        print("\n" * 2)
 
