@@ -12,7 +12,7 @@ class Order(Base):
     store_id = sa.Column(sa.Integer, sa.ForeignKey('stores.store_id', ondelete='SET NULL', onupdate='CASCADE'),nullable=True)
     order_date = sa.Column(sa.DateTime, default=datetime.utcnow, nullable=False)
     customer = relationship("Customer", back_populates="orders")
-    employees = relationship("Employee", back_populates="orders")
+    employee = relationship("Employee", back_populates="orders")
     store = relationship("Store", back_populates="orders")
     order_lines = relationship("OrderDetail", back_populates="order")
 

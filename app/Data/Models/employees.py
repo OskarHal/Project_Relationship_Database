@@ -12,7 +12,7 @@ class Employee(Base):
     employee_email = sa.Column(sa.String(45), nullable=False)
     store_id = sa.Column(sa.Integer, sa.ForeignKey("stores.store_id", ondelete='SET NULL', onupdate='CASCADE'))
     store = relationship("Store", back_populates="employees")
-    orders = relationship("Order", back_populates="employees")
+    orders = relationship("Order", back_populates="employee")
 
     def __repr__(self):
         return f'Employee(employee_id ={self.employee_id}, ' \

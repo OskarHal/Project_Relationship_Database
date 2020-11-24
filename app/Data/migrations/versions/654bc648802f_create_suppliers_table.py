@@ -1,18 +1,20 @@
-"""create table suppliers
+"""Create suppliers table
 
-Revision ID: 97ac442cfd5a
-Revises: 78139cdb4887
-Create Date: 2020-11-17 15:06:49.448993
+Revision ID: 654bc648802f
+Revises: b47ec1d85acb
+Create Date: 2020-11-24 13:15:38.372163
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+
 # revision identifiers, used by Alembic.
-revision = '97ac442cfd5a'
-down_revision = '78139cdb4887'
+revision = '654bc648802f'
+down_revision = 'b47ec1d85acb'
 branch_labels = None
 depends_on = None
+
 
 
 def upgrade():
@@ -30,3 +32,5 @@ def upgrade():
 
 def downgrade():
     op.drop_table('suppliers')
+
+
