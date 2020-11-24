@@ -2,14 +2,45 @@ import Controllers.employee_controller as ec
 from UI.product_menu import input_int_validation
 
 
-def fire_employee(employee):
-    print(f"Give {employee.employee_lastname} reason for being fired".center(30, " "))
-    print("=" * 30)
-    print("1. The smell is unbearable")
-    print("2. Nobody likes him")
-    print("3. Your not a fan of Star Wars")
+def fire_message(employee, reason):
+    if reason == 1:
+        print(f"{employee.employee_lastname} was successfully fired for his terrible smell")
+    elif reason == 2:
+        print(f"{employee.employee_lastname} was let go because he just couldn't keep his mouth shut")
+    elif reason == 3:
+        valuables = ec.theft(employee)
+        print(
+            f"Ouch, looks like you fired {employee.employee_name} {employee.employee_lastname} and he wasn't happy"
+            f" with the reason you gave gim. \nHe ran off in your customer {valuables[3]}s"
+            f" {valuables[0].customer_car_brand} with {valuables[1]} {valuables[2]}s from your office in {employee.store.store_name}"
+        )
 
-    input_int_validation(message="Thread carefully, your carisma lvl is low!")
+
+def fire_employee(employee):
+    while True:
+        print(f"Give {employee.employee_lastname} reason for being fired".center(30, " "))
+        print("=" * 30)
+        print("1. The smell is unbearable")
+        print("2. That one time on the company christmas party")
+        print("3. Your not a fan if Star Wars")
+        print("0. Exit")
+
+        selection = input_int_validation("Thread carefully, your carisma lvl is low!")
+
+        if selection == 1:
+            fire_message(employee, selection)
+            ec.fire_employee(employee)
+            break
+        elif selection == 2:
+            fire_message(employee, selection)
+            ec.fire_employee(employee)
+            break
+        elif selection == 3:
+            fire_message(employee, selection)
+            ec.fire_employee(employee)
+            break
+        elif selection == 0:
+            print("Unable")
 
 
 def employee_edit_menu(employee):
@@ -18,8 +49,9 @@ def employee_edit_menu(employee):
         print("=" * 30)
         print(f"1. Show orders handled by {employee.employee_lastname}")
         print(f"2. Fire {employee.employee_lastname}")
+        print("0. Exit")
 
-        selection = input_int_validation(message="Menu selection")
+        selection = input_int_validation("Menu selection")
 
         if selection == 1:
             print(
@@ -39,7 +71,7 @@ def select_employee_menu():
         print("=" * 30)
         print("0. Exit")
 
-        selection = input_int_validation(message="Enter employee ID")
+        selection = input_int_validation("Enter employee ID")
 
         if selection == 0:
             break
@@ -54,11 +86,11 @@ def employee_menu():
         print("Employee Menu".center(30, " "))
         print("=" * 30)
         print("1. Show employees")
-        print("2. Select employee") # sök namn eller ID
+        print("2. Select employee")
         print("3. Add employee")
         print("0. Exit")
 
-        selection = input_int_validation(message="Menu selection")
+        selection = input_int_validation("Menu selection")
 
         if selection == 1:
             employees = ec.get_all_employees()
@@ -70,7 +102,7 @@ def employee_menu():
             select_employee_menu()
             break
         elif selection == 3:
-            pass # ---> Kör här :D
+            pass
         elif selection == 0:
             break
 
