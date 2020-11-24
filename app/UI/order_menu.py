@@ -3,6 +3,7 @@ from Controllers.product_controller import get_all_products
 from UI.customer_menu import *
 from Data.Models.orders import Order
 from Data.Models.order_details import OrderDetail
+from UI.product_menu import input_int_validation
 
 
 def order_id_print(order_id):
@@ -40,11 +41,11 @@ def order_by_date_print(order_date):
 
 def get_order_details(existing=False):
     print("===================")
-    employee_id = int(input("Enter your employee number: "))
-    store_id = int(input("Enter your store id"))
+    employee_id = input_int_validation("Enter your employee number: ")
+    store_id = input_int_validation("Enter your store id")
 
     if existing:
-        customer_id = input("Enter customer_id: ")
+        customer_id = input_int_validation("Enter customer_id: ")
         new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
         return new_order
     else:
@@ -57,7 +58,6 @@ def get_product_in_order(new_order):
     print(f"Products".center(45, '#'))
     products = get_all_products()
     for product in products:
-        #print(f'Product ID: {product.spare_part_id}, Description: {product.description}')
         print(f"Id: ".ljust(30), end='|')
         print(f"{product.spare_part_id}")
         print(f"Description: ".ljust(30), end='|')
@@ -69,7 +69,7 @@ def get_product_in_order(new_order):
         spare_part_id = input("Enter product id: ")
         if spare_part_id.lower() == "done":
             break
-        quantity = input("How many of said product: ")
+        quantity = input_int_validation("How many of said product: ")
         line = OrderDetail(spare_part_id=spare_part_id, quantity=quantity)
         new_order.order_lines.append(line)
     return new_order

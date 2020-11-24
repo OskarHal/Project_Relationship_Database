@@ -1,16 +1,17 @@
-"""create table customers
+"""Create customer table
 
-Revision ID: 92e62e07f010
-Revises: 12dcc8131f1b
-Create Date: 2020-11-17 15:07:02.294975
+Revision ID: a68480028d11
+Revises: 914432d81965
+Create Date: 2020-11-24 13:17:05.490201
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+
 # revision identifiers, used by Alembic.
-revision = '92e62e07f010'
-down_revision = '12dcc8131f1b'
+revision = 'a68480028d11'
+down_revision = '914432d81965'
 branch_labels = None
 depends_on = None
 

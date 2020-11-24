@@ -1,18 +1,21 @@
-"""create table stores
+"""Create stores table
 
-Revision ID: 96f9536c7d9c
-Revises: 4add503fdd14
-Create Date: 2020-11-17 15:07:12.677478
+Revision ID: 9df13975cf63
+Revises: ceb74a11d5c4
+Create Date: 2020-11-24 13:19:46.892538
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+
 # revision identifiers, used by Alembic.
-revision = '96f9536c7d9c'
-down_revision = '4add503fdd14'
+revision = '9df13975cf63'
+down_revision = 'ceb74a11d5c4'
 branch_labels = None
 depends_on = None
+
+
 
 
 def upgrade():
