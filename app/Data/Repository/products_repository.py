@@ -38,3 +38,12 @@ def update_product(product: SparePart, attribute_name, new_value):
         session.rollback()
     finally:
         return success
+
+
+def add_product(product:SparePart):
+
+    session.add(product)
+    session.commit()
+
+    product.print_all_information_with_relationships()
+

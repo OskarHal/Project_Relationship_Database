@@ -1,9 +1,35 @@
 from copy import copy
+from datetime import date, datetime
 
 from Controllers.product_controller import get_product_by_product_nr, delete_product, \
-    get_products_by_product_description_pattern, update_product
+    get_products_by_product_description_pattern, update_product, add_product
 from Data.Models.spare_parts import SparePart
 
+
+
+def add_product_interface():
+    product_nr = input("Add product nr: ")
+    description = input("Add description ")
+    purchase_price = float(input("Add purchase price: "))
+    selling_price = float(input("Add selling price: "))
+    reorder_level = int(input("Add reorder level: "))
+    order_quantity = int(input("Add order quantity: "))
+    # estimated_time_of_arrival = int(input("Add estimated time of arrival: "))
+
+    manufacturer_id = int(input("Add manufacturer id: "))
+    supplier_id = int(input("Add supplier id: "))
+
+    new_product = SparePart(product_nr=product_nr,
+                            description=description,
+                            purchase_price=purchase_price,
+                            selling_price=selling_price,
+                            reorder_level=reorder_level,
+                            order_quantity=order_quantity,
+                            manufacturer_id=manufacturer_id,
+                            supplier_id=supplier_id)
+
+    print(new_product)
+    add_product(new_product)
 
 def product_menu():
     while True:
@@ -23,7 +49,7 @@ def product_menu():
         elif selection == 2:
             search_products_by_description_pattern()
         elif selection == 3:
-            pass
+            add_product_interface()
         elif selection == 0:
             break
 
@@ -98,10 +124,6 @@ def edit_product_handler(product: SparePart, attribute_name: str):
     new_value = input_int_validation(input_description="Enter new data: ")
     success = update_product(product=product, attribute_name=attribute_name, new_value=new_value)
     print_success_message(success=success, print_function=product.print_all_information_with_relationships)
-
-
-def add_product():
-    pass
 
 
 
