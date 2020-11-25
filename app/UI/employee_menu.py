@@ -5,14 +5,17 @@ from UI.product_menu import input_int_validation
 def fire_message(employee, reason):
     if reason == 1:
         print(f"{employee.employee_lastname} was successfully fired for his terrible smell")
+
     elif reason == 2:
         print(f"{employee.employee_lastname} was let go because he just couldn't keep his mouth shut")
+
     elif reason == 3:
         valuables = ec.theft(employee)
         print(
             f"Ouch, looks like you fired {employee.employee_name} {employee.employee_lastname} and he wasn't happy"
-            f" with the reason you gave gim. \nHe ran off in your customer {valuables[3]}s"
-            f" {valuables[0].customer_car_brand} with {valuables[1]} {valuables[2]}s from your office in {employee.store.store_name}"
+            f" with the reason you gave gim. \nHe ran off in your customer {valuables[2]}s"
+            f" {valuables[1].customer_car_brand} with {valuables[0][0]} {valuables[0][1]}s from your office in "
+            f"{employee.store.store_name}"
         )
 
 
@@ -31,14 +34,17 @@ def fire_employee(employee):
             fire_message(employee, selection)
             ec.fire_employee(employee)
             break
+
         elif selection == 2:
             fire_message(employee, selection)
             ec.fire_employee(employee)
             break
+
         elif selection == 3:
             fire_message(employee, selection)
             ec.fire_employee(employee)
             break
+
         elif selection == 0:
             print("Unable")
 
@@ -61,6 +67,7 @@ def employee_edit_menu(employee):
             )
         elif selection == 2:
             fire_employee(employee)
+
         elif selection == 0:
             break
 
@@ -78,6 +85,7 @@ def select_employee_menu():
 
         employee = ec.get_employee_by_id(selection)
         employee_edit_menu(employee)
+
         break
 
 
@@ -98,11 +106,14 @@ def employee_menu():
                 "\n".join(f"{employee.employee_name} {employee.employee_lastname} works at our office in "
                           f"{employee.store.store_name}" for employee in employees)
             )
+
         elif selection == 2:
             select_employee_menu()
             break
+
         elif selection == 3:
             pass
+
         elif selection == 0:
             break
 

@@ -20,33 +20,11 @@ def main():
     Base.metadata.create_all(engine)
     main_menu()
 
-    # order_1 = Order(customer_id=1, employee_id=1, store_id=1)
+    # company_customer_alembic_table_fix
+        # company_customer_company_name
 
-    # la till back populates på manufacturer
-    # lägg till lovetable values i car_models_spare_parts
-
-    # session.add(order_1)
-    # session.commit()
-    # print(order_1.order_date)
-
-    # spareparts = session.query(SparePart).all()
-    #
-    # customers = session.query(Customer).all()
-    #
-    # orders = session.query(Order).all()
-    #
-    # for customer in customers:
-    #     print(customer)
-    #
-    # for spare in spareparts:
-    #     print(f"{spare.description,spare.manufacturer}".center(30, '='))
-    #     for stores_parts in spare.stores:
-    #         print(stores_parts.store.store_name.ljust(15), end="")
-    #         print(stores_parts.stock_location.ljust(10), end="")
-    #         print(f"{stores_parts.stock}")
-    #
-    # for order in orders:
-    #     print(f"{order.order_date}".center(30, '='))
+    # Customer_car alembic table fix
+        # customer_registration_nr
 
 if __name__ == "__main__":
     main()

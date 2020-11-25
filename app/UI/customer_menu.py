@@ -113,12 +113,14 @@ def add_customer_car():
     print("Customer car information".center(30, " "))
     print("".center(30, "="))
 
-    return {f"customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["Registration nr", "Car brand", "Car model", "Car model_year", "Car color"]}
+    return {f"customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
+            ["Registration nr", "Car brand", "Car model", "Car model_year", "Car color"]}
 
 
 def verify_information(customer, car):
     print("OBS!".center(30, "-"))
     print("\n".join(f"{key}: {customer[key]}" for key in customer))
+
     print("car information".center(30, "-"))
     print("\n".join(f"{key}: {car[key]}" for key in car))
 
@@ -128,7 +130,8 @@ def add_private_customer(customer_type, order=False):
         print("Private Customer".center(30, " "))
         print("".center(30, "="))
 
-        priv_customer_dict = {f"private_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["First name", "Last name", "Phone", "Email"]}
+        priv_customer_dict = {f"private_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
+                              ["First name", "Last name", "Phone", "Email"]}
 
         customer_car_dict = add_customer_car()
         verify_information(priv_customer_dict, customer_car_dict)
@@ -142,13 +145,16 @@ def add_private_customer(customer_type, order=False):
 
             if order:
                 return private_customer
+
             else:
                 cc.add_private_customer(private_customer)
                 print("Customer saved!".center(30, "-"))
                 break
+
         elif verification == "2":
             print("Save cancelled!".center(30, "-"))
             break
+
         else:
             print(f"{ERROR_MESSAGE_TWO}. Data wasn't saved!")
             continue
@@ -159,7 +165,8 @@ def add_company_customer(customer_type, order=False):
         print("Company Customers".center(30, " "))
         print("".center(30, "="))
 
-        comp_customer_dict = {f"company_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in ["Company Name", "First name", "Last Name", "Email", "Phone"]}
+        comp_customer_dict = {f"company_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
+                              ["Company Name", "First name", "Last Name", "Email", "Phone"]}
 
         customer_car_dict = add_customer_car()
         verify_information(comp_customer_dict, customer_car_dict)
@@ -170,15 +177,19 @@ def add_company_customer(customer_type, order=False):
             company_customer = CompanyCustomer(**comp_customer_dict)
             company_customer.customer = Customer(customer_type=customer_type)
             company_customer.customer.cars.append(CustomerCar(**customer_car_dict))
+
             if order:
                 return company_customer
+
             else:
                 cc.add_company_customer(company_customer)
                 print("Customer saved!".center(30, "-"))
                 break
+
         elif verification == "2":
             print("Save cancelled!".center(30, "-"))
             break
+
         else:
             print(f"{ERROR_MESSAGE_TWO}. Data wasn't saved!")
             continue
@@ -188,17 +199,22 @@ def add_customer_menu():
     while True:
         print("Add Customers Menu".center(30, " "))
         print("".center(30, "="))
+
         try:
             customer_type = int(input("Enter customer type:\n(1) Private\n(2) Company\n:> "))
+
         except ValueError:
             print(f"{ERROR_MESSAGE_TWO}")
             continue
+
         if customer_type == 1:
             add_private_customer(customer_type)
             break
+
         elif customer_type == 2:
             add_company_customer(customer_type)
             break
+
         else:
             print(f"Customer type {customer_type} doesn't exist. Choose either 1 or 2")
 
