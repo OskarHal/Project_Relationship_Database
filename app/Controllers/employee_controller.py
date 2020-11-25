@@ -15,10 +15,12 @@ def fire_employee(employee):
 
 
 def theft(thief):
-    amount, item = er.steal_products(thief)
-    car = ccr.steal_car()
-    if car.owner.customer_type == 1:
-        owner = car.owner.priv_customer[0].private_customer_first_name
-    elif car.owner.customer_type == 2:
-        owner = car.owner.comp_customer[0].company_customer_company_name
-    return car, amount, item, owner
+    valuables = [er.steal_products(thief), ccr.steal_car()]
+
+    if valuables[1].owner.customer_type == 1:
+        valuables.append(valuables[1].owner.priv_customer[0].private_customer_first_name)
+
+    elif valuables[1].owner.customer_type == 2:
+        valuables.append(valuables[1].owner.comp_customer[0].company_customer_company_name)
+
+    return valuables
