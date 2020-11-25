@@ -15,73 +15,86 @@ def delete_message(success):
 
 
 def edit_data(customer):
+
     while True:
-        print("Choose the edit")
-        print("==============")
+        print("Edit menu ".center(30, " "))
+        print("".center(30, "="))
         print("1.Edit E-mail")
         print("2.Edit Phone number")
         print("0.Exit")
+
         selection = input("> ")
+
         if selection == "1":
+
             edit_email = input("> Enter new email: ")
             cc.edit_new_email(customer, edit_email)
-            print("==============")
-            print(f"The email is now updated to {edit_email}")
-            print("==============")
+
+            print(f"The email is now updated to {edit_email}".center(30, " "))
+            print("".center(30, "="))
+
             break
-        if selection == "2":
+
+        elif selection == "2":
+
             edit_phone_number = input("> Enter new phone number: ")
             cc.edit_new_phone_number(customer, edit_phone_number)
-            print("==============")
-            print(f"The phone number is now updated to {edit_phone_number}")
-            print("==============")
-        if selection == "0":
+
+            print(f"The phone number is now updated to {edit_phone_number}".center(30, " "))
+            print("".center(30, "="))
+
+        elif selection == "0":
             break
 
 
 def manipulation_data(customer):
     while True:
-        print("Edit menu")
-        print("==============")
-        print("Select what you want to do?")
+        print("Select option: ".center(30, " "))
+        print("".center(30, "="))
         print("1.Edit")
         print("2.Delete")
         print("3.Show customer car")
         print("4.Show customer order history")
         print("0.Exit")
+
         selection = input("> ")
+
         if selection == "1":
             edit_data(customer)
-        if selection == "2":
+        elif selection == "2":
             print(delete_message(cc.delete_customer(customer)))
             continue
-        if selection == "3":
+        elif selection == "3":
             pass
-        if selection == "4":
+        elif selection == "4":
             pass
-        if selection == "0":
+        elif selection == "0":
             break
 
 
 def select_customer_menu():
+
     while True:
-        print("Customers Menu")
-        print("==============")
-        print("Find Customer by:")
-        print("==============")
+        print("Find Customer by:".center(30, " "))
+        print("".center(30, "="))
         print("1.ID")
         print("2.First name (Private Customer)")
         print("3.Company name")
         print("0.Exit")
         selection = input("> ")
+
         if selection == "1":
+
             selected_id = input("> Enter ID")
+
             try:
                 int(selected_id)
             except ValueError:
                 print(ERROR_MESSAGE_TWO + "only enter numbers 0-9")
                 continue
+
             customer = get_customer_by_id(selected_id)
+
             if customer:
                 if customer.customer_type == 1:
                     private_customer = customer.priv_customer
@@ -95,17 +108,21 @@ def select_customer_menu():
 
             else:
                 print(ERROR_MESSAGE_ONE + "with customer id " + selected_id)
+
         if selection == "2":
+
             selected_first_name = input("> Enter First name").lower()
             customer = cc.get_customer_by_first_name(selected_first_name)
             print(customer)
             manipulation_data(customer)
-        if selection == "3":
+        elif selection == "3":
+
             selected_company_name = input("> Enter Company name")
             customer = cc.get_customer_by_company_name(selected_company_name)
             print(customer)
             manipulation_data(customer)
-        if selection == "0":
+
+        elif selection == "0":
             break
 
 
@@ -221,8 +238,8 @@ def add_customer_menu():
 
 def customers_menu():
     while True:
-        print("Customers Menu")
-        print("==============")
+        print("Customers Menu".center(30, " "))
+        print("".center(30, "="))
         print("1.View All Customers")
         print("2.Select Customer")
         print("3.Add New Customer")
