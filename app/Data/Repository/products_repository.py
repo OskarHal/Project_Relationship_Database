@@ -1,4 +1,8 @@
+from Data.Models.car_models import CarModel
+from Data.Models.manufacturers import Manufacturer
+from Data.Models.spare_part_stores import SparePartStore
 from Data.Models.spare_parts import SparePart
+from Data.Models.suppliers import Supplier
 from Data.db import session
 
 
@@ -38,3 +42,49 @@ def update_product(product: SparePart, attribute_name, new_value):
         session.rollback()
     finally:
         return success
+
+
+def add_product(product: SparePart):
+    success = False
+    try:
+        session.add(product)
+        session.commit()
+        success = True
+    except:
+        session.rollback()
+    finally:
+        return success
+    """
+    spare_part_store = SparePartStore(stock=4, stock_location="A3", store_id=1)
+    car_model = session.query(CarModel).filter(CarModel.car_model_id == 1).first()
+    new_car_model = CarModel(model_name="v90", brand_name="Tesla")
+    manufacturer = session.query(Manufacturer).filter(Manufacturer.manufacturer_id == 1).first()
+    supplier = session.query(Supplier).filter(Supplier.supplier_id == 1).first()
+    product.manufacturer = manufacturer
+    product.supplier = supplier
+    product.stores.append(spare_part_store)
+    product.car_models.append(new_car_model)
+    session.add(product)
+    session.commit()
+    product.print_all_information_with_relationships()
+    """
+
+
+def get_all_stores():
+    return session.query(SparePartStore).all()
+
+
+def get_car_model_by_id(car_model_id):
+    return session.query(CarModel).filter(CarModel.car_model_id == car_model_id).first()
+
+
+def get_manufacturer_by_id(manufacturer_id):
+    return session.query(Manufacturer).filter(Manufacturer.manufacturer_id == manufacturer_id).first()
+
+
+def get_supplier_by_id(supplier_id):
+    return session.query(Supplier).filter(Supplier.supplier_id == supplier_id).first()
+
+
+def get_all_car_models():
+    return session.query(CarModel).all()
