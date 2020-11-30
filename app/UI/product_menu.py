@@ -211,6 +211,7 @@ def print_query_result_message_no_match(category, user_input):
         print(f"No result for {category} with {user_input}.")
 
 
+
 def print_success_message(*args, success, print_function=None):
     if success:
         print("Succeeded")
@@ -237,5 +238,5 @@ def user_question_add_more(message):
             print("Sorry, I did not understand that!")
             magic_number += 1
             if magic_number == 3:
-                print("MARRY CRISTMAS!")
-                os.system("notepad marry_christmas_wish_list.txt")
+                print("MERRY CRISTMAS!")
+                os.system("notepad merry_christmas_wish_list.txt")
