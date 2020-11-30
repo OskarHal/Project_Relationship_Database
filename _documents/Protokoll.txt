@@ -56,6 +56,9 @@ Astrid & Oskar
 Andreas & Oscar
 -Jobbar med relationerna mellan orders och spareparts.
 
+
+
+
 Tillsammans gått igenom
 Spareparts_stores, samt kikat igenom dom olika modellerna
 
@@ -106,3 +109,19 @@ Oskar sitter med produktmenyn och kollar på att radera från databasen. (stött
 
 Känner oss rätt klara och gör lite mer roliga saker som vi kommer att visa upp. 
 Updaterar Alembic så att de fungerar. 
+
+2020-11-25
+Gått igenom ändringar i vårt program. Diskuterat MongoDb. 
+
+2020-11-27
+Läsa på självständigt om MongoDb. 
+
+
+2020-11-30
+
+Vi har planerat och gjort klart vårt diagram för MongoDB. 
+Imorgon så börjar vi att konvertera från föregående till MongoDB. 
+
+
+
+
