@@ -115,10 +115,11 @@ INSERT INTO company_contacts
 (manufacturer_contact_name,
 manufacturer_contact_phone_nr,
 manufacturer_contact_email,
-manufacturer_contact_id)
+manufacturer_contact_id,
+manufacturer_id)
 VALUES
-('Arvid', '0707-070707', 'Company@mail.com', 1),
-('David', '0707-707070', 'Company2@mail.com', 2);
+('Arvid', '0707-070707', 'Company@mail.com', 1, 1),
+('David', '0707-707070', 'Company2@mail.com', 2, 2);
 
 
 INSERT INTO orders
