@@ -1,0 +1,3 @@
+MONGO_PASSWORD = 's3cr37'
+MONGO_HOST = 'localhost'
+MONGO_PORT = '27027'
