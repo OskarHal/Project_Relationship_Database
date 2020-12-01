@@ -1,7 +1,0 @@
-venv/
-.idea/
-app/Data/alembic.ini
-app/Data/db/db_settings/
-docker-compose.yml
-__pycache__/
-app/MongoDB/db/db_settings/
