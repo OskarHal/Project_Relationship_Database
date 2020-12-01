@@ -1,5 +1,7 @@
+import datetime
 from Data.Models.customer import Customer
 from Data.Models.employees import Employee
+from Data.Models.spare_parts import SparePart
 from Data.Models.stores import Store
 from Data.Models.suppliers import Supplier
 from Data.db import session
@@ -7,6 +9,8 @@ from MongoDB.Models.suppliers import Supplier as MongoSupplier
 from MongoDB.Models.stores import Store as MongoStore
 from MongoDB.Models.employees import Employee as MongoEmployee
 from MongoDB.Models.customers import Customers as MongoCustomer
+from MongoDB.Models.spare_parts import SparePart as MongoSparePart
+from MongoDB.Models.manufacturers import Manufacturer as MongoManufacturer
 
 
 def fix_suppliers():
@@ -75,4 +79,39 @@ def fix_employees():
 
         mongo_employee = MongoEmployee(as_dict)
         mongo_employee.save()
+
+
+def fix_spare_parts():
+    spare_parts = session.query(SparePart).all()
+
+    for spare_part in spare_parts:
+        as_dict = spare_part.__dict__
+        as_dict['manufacturer_id'] = MongoManufacturer.find(manufacturer_id=spare_part.manufacturer_id).first_or_none()._id
+        as_dict['supplier_id'] = MongoSupplier.find(supplier_id=spare_part.supplier_id).first_or_none()._id
+        car_models = []
+        if spare_part.car_models is not None:
+            for car_model in spare_part.car_models:
+                car_models.append({
+                    'model_name': car_model.model_name,
+                    'brand_name': car_model.brand_name
+                })
+            as_dict.update({
+                'car_models': car_models
+            })
+        stores = []
+        for store in spare_part.stores:
+            stores.append({
+                'store_id': MongoStore.find(store_id=store.store_id).first_or_none()._id,
+                'stock': store.stock,
+                'stock_location': store.stock_location
+            })
+        as_dict.update({
+            'stores': stores
+        })
+        as_dict['estimated_time_of_arrival'] = datetime.datetime(spare_part.estimated_time_of_arrival.year,
+                                                                 spare_part.estimated_time_of_arrival.month,
+                                                                 spare_part.estimated_time_of_arrival.day)
+        del as_dict["_sa_instance_state"]
+        mongo_spare_part = MongoSparePart(as_dict)
+        mongo_spare_part.save()
 
