@@ -22,34 +22,3 @@ def fix_manufacturers():
 
         mongo_manufacturer = MongoManufacturer(as_dict)
         mongo_manufacturer.save()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# manufacturer_as_dict = manufacturer.__dict__
-# manufacturer_as_dict['company_contacts'] = {key: value for key, value in manufacturer_as_dict['company_contacts'].items() if value is not None}
-
-
-
-
-
-# manufacturers
-# _id	pk	old
-# manufacturer_name		str
-# manufacturer_phone_nr		str
-# manufacturer_address		str
-# company_contacts []
-# manufacturer_contact_name		str
-# manufacturer_contact_phone_nr		str
-# manufacturer_contact_email		str
