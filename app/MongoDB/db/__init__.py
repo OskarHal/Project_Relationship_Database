@@ -1,9 +1,8 @@
 from pymongo import MongoClient
-from MongoDB.db.db_settings import *
 from abc import ABC
+from MongoDB.db.db_settings import *
 
-
-client = MongoClient(f'mongodb://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}')
+client = MongoClient(f'mongodb://root:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}')
 db = client.carparts
 
 
@@ -53,3 +52,4 @@ class Document(dict, ABC):
     @classmethod
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
+
