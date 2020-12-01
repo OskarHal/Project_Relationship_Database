@@ -52,3 +52,4 @@ class Document(dict, ABC):
     @classmethod
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
+
