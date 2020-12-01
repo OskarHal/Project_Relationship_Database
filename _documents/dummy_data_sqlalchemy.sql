@@ -139,6 +139,7 @@ INSERT INTO order_details
 order_id,
 Quantity)
 VALUES
+(1, 1, 5),
 (1, 2, 5),
 (2, 3, 5),
 (3, 4, 6);
