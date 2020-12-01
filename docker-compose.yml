@@ -3,15 +3,14 @@ version: "3"
 services:
   mysql:
     image: mysql:latest
-    container_name: "Relations_DB"
+    container_name: "MySQL_DB"
     ports:
-      - 33007:3306
+      - 33006:3306
     cap_add:
       - SYS_NICE
     environment:
-      MYSQL_ROOT_PASSWORD: se3cr37
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: carparts
-
 
   mongo:
     image: mongo
@@ -20,8 +19,7 @@ services:
       - 27027:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: s3cr37
-
+      MONGO_INITDB_ROOT_PASSWORD: password
 
   mongo-express:
     image: mongo-express
@@ -30,4 +28,4 @@ services:
       - 8081:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: s3cr37
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
