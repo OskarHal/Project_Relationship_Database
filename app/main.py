@@ -14,18 +14,18 @@ from Data.Models.orders import Order
 from Data.Models.order_details import OrderDetail
 from Data.Models.spare_part_stores import SparePartStore
 from UI.main_menu import main_menu
-from mysql_to_mongo_migration.migration_functions import fix_suppliers, fix_customers, fix_stores, fix_employees
+from mysql_to_mongo_migration.migration_functions import fix_suppliers, fix_customers, fix_stores, fix_employees, fix_manufacturer
 
 
 def main():
-    # fix_customers()
-    # fix_suppliers()
+    # fix_manufacturer()
     # fix_employees()
     # fix_stores()
+    # fix_customers()
+    # fix_suppliers()
     # Base.metadata.create_all(engine)
     # main_menu()
 
 
 if __name__ == "__main__":
     main()
-
