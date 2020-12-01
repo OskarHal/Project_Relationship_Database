@@ -17,8 +17,7 @@ def fix_suppliers():
         del as_dict["_sa_instance_state"]
 
         mongo_supplier = MongoSupplier(as_dict)
-
-
+        mongo_supplier.save()
 
 
 def fix_customers():

@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from abc import ABC
 from MongoDB.db.db_settings import *
 
-client = MongoClient(f'mongodb://root:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}')
+client = MongoClient(f'mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}')
 db = client.carparts
 
 

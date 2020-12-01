@@ -19,12 +19,13 @@ from mysql_to_mongo_migration.manufacturers_migration import fix_manufacturers
 
 
 def main():
-    # fix_manufacturer()
-    # fix_employees()
-    # fix_stores()
-    # fix_customers()
     # fix_suppliers()
-    # Base.metadata.create_all(engine)
+    # fix_manufacturers()
+    # fix_stores()
+    # fix_employees()
+    # fix_customers()
+
+    Base.metadata.create_all(engine)
     # main_menu()
 
 
