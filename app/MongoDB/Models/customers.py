@@ -1,5 +1,5 @@
 from MongoDB.db import Document, db
 
 
-class Customers(Document):
+class Customer(Document):
     collection = db.customers

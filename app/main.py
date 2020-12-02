@@ -29,7 +29,7 @@ def main():
     # fix_spare_parts()
     # fix_orders()
     # Base.metadata.create_all(engine)
-    # main_menu()
+    main_menu()
 
 if __name__ == "__main__":
     main()

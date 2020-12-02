@@ -1,3 +1,5 @@
+import datetime
+
 from Controllers.order_controller import create_order, find_order_by_id, find_order_by_date
 from Controllers.product_controller import get_all_products
 from UI.customer_menu import *
@@ -24,19 +26,35 @@ def order_id_print(order_id):
 
 def order_by_date_print(order_date):
     orders = find_order_by_date(order_date)
-    print("===================")
+    #----MySQL----
+    # for order in orders:
+    #     if order.customer.customer_type == 1:
+    #         print(f'Order by customer{order.customer.comp_customer[0].company_customer_first_name} '
+    #               f'{order.customer.comp_customer[0].company_customer_last_name},'
+    #               f'employee {order.employees.employee_name} '
+    #               f'in store {order.store.store_name} made on {order.order_date}')
+    #     elif order.customer.customer_type == 2:
+    #         print(f'Order by customer{order.customer.priv_customer[0].private_customer_first_name} '
+    #               f'{order.customer.priv_customer[0].private_customer_last_name}, '
+    #               f'employee {order.employees.employee_name} '
+    #               f'in store {order.store.store_name} made on {order.order_date}')
+    # print("")
+
     for order in orders:
-        if order.customer.customer_type == 1:
-            print(f'Order by customer{order.customer.comp_customer[0].company_customer_first_name} '
-                  f'{order.customer.comp_customer[0].company_customer_last_name},'
-                  f'employee {order.employees.employee_name} '
-                  f'in store {order.store.store_name} made on {order.order_date}')
-        elif order.customer.customer_type == 2:
-            print(f'Order by customer{order.customer.priv_customer[0].private_customer_first_name} '
-                  f'{order.customer.priv_customer[0].private_customer_last_name}, '
-                  f'employee {order.employees.employee_name} '
-                  f'in store {order.store.store_name} made on {order.order_date}')
-    print("")
+        if hasattr(order.customer, 'company_name'):
+            print(f'Order made by company {order.customer.company_name}, contact name {order.customer.customer_first_name}\n'
+                  f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
+                  f'Made on {order.order_date} \n'
+                  f'Containing {order.order_details} \n'
+                  f' --------------------------- ')
+
+        else:
+            print(f'Order made by {order.customer.customer_first_name} {order.customer.customer_last_name},\n'
+                f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
+                f'Made on {order.order_date} \n'
+                f'Containing {order.order_details} \n'
+                f' --------------------------- ')
+
 
 
 def get_order_details(existing=False):
@@ -116,6 +134,7 @@ def order_menu():
             order_id_print(order_id)
         elif selection == "3":
             order_date = input("Enter order date (yyyy-mm-dd): ")
-            order_by_date_print(order_date)
+            date_time = datetime.datetime.strptime(order_date, '%Y-%m-%d')
+            order_by_date_print(date_time)
         elif selection == "0":
             break
