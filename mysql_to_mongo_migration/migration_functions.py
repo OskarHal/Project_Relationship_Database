@@ -142,3 +142,33 @@ def fix_orders():
 
         mongo_order = MongoOrder(as_dict)
         mongo_order.save()
+
+
+def cleaning_ids():
+    customers = MongoCustomer.all()
+    for customer in customers:
+        customer.delete_field("customer_id")
+
+    employees = MongoEmployee.all()
+    for employee in employees:
+        employee.delete_field("employee_id")
+
+    manufacturers = MongoManufacturer.all()
+    for man in manufacturers:
+        man.delete_field("manufacturer_id")
+
+    orders = MongoOrder.all()
+    for order in orders:
+        order.delete_field("order_id")
+
+    spare_parts = MongoSparePart.all()
+    for spare in spare_parts:
+        spare.delete_field("spare_part_id")
+
+    stores = MongoStore.all()
+    for store in stores:
+        store.delete_field("store_id")
+
+    suppliers = MongoSupplier.all()
+    for supplier in suppliers:
+        supplier.delete_field("supplier_id")
