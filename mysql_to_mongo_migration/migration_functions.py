@@ -1,6 +1,7 @@
 import datetime
 from Data.Models.customer import Customer
 from Data.Models.employees import Employee
+from Data.Models.orders import Order
 from Data.Models.spare_parts import SparePart
 from Data.Models.stores import Store
 from Data.Models.suppliers import Supplier
@@ -11,6 +12,7 @@ from MongoDB.Models.employees import Employee as MongoEmployee
 from MongoDB.Models.customers import Customers as MongoCustomer
 from MongoDB.Models.spare_parts import SparePart as MongoSparePart
 from MongoDB.Models.manufacturers import Manufacturer as MongoManufacturer
+from MongoDB.Models.orders import Order as MongoOrder
 
 
 def fix_suppliers():
@@ -86,7 +88,8 @@ def fix_spare_parts():
 
     for spare_part in spare_parts:
         as_dict = spare_part.__dict__
-        as_dict['manufacturer_id'] = MongoManufacturer.find(manufacturer_id=spare_part.manufacturer_id).first_or_none()._id
+        as_dict['manufacturer_id'] = MongoManufacturer.find(
+            manufacturer_id=spare_part.manufacturer_id).first_or_none()._id
         as_dict['supplier_id'] = MongoSupplier.find(supplier_id=spare_part.supplier_id).first_or_none()._id
         car_models = []
         if spare_part.car_models is not None:
@@ -115,3 +118,57 @@ def fix_spare_parts():
         mongo_spare_part = MongoSparePart(as_dict)
         mongo_spare_part.save()
 
+
+def fix_orders():
+    orders = session.query(Order).all()
+
+    for order in orders:
+        as_dict = order.__dict__
+        as_dict["employee_id"] = MongoEmployee.find(employee_id=order.employee_id).first_or_none()._id
+        as_dict["customer_id"] = MongoCustomer.find(customer_id=order.customer_id).first_or_none()._id
+        as_dict["store_id"] = MongoStore.find(store_id=order.store_id).first_or_none()._id
+
+        order_line = [{
+            "spare_part_id": MongoSparePart.find(spare_part_id=ol.spare_part_id).first_or_none()._id,
+            "quantity": ol.quantity
+        }
+            for ol in order.order_lines
+        ]
+
+        as_dict.update({"order_detail": order_line})
+
+        del as_dict["order_lines"]
+        del as_dict["_sa_instance_state"]
+
+        mongo_order = MongoOrder(as_dict)
+        mongo_order.save()
+
+
+def cleaning_ids():
+    customers = MongoCustomer.all()
+    for customer in customers:
+        customer.delete_field("customer_id")
+
+    employees = MongoEmployee.all()
+    for employee in employees:
+        employee.delete_field("employee_id")
+
+    manufacturers = MongoManufacturer.all()
+    for man in manufacturers:
+        man.delete_field("manufacturer_id")
+
+    orders = MongoOrder.all()
+    for order in orders:
+        order.delete_field("order_id")
+
+    spare_parts = MongoSparePart.all()
+    for spare in spare_parts:
+        spare.delete_field("spare_part_id")
+
+    stores = MongoStore.all()
+    for store in stores:
+        store.delete_field("store_id")
+
+    suppliers = MongoSupplier.all()
+    for supplier in suppliers:
+        supplier.delete_field("supplier_id")
