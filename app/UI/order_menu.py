@@ -6,6 +6,7 @@ from UI.customer_menu import *
 from Data.Models.orders import Order
 from Data.Models.order_details import OrderDetail
 from UI.product_menu import input_int_validation
+from MongoDB.Models.orders import Order
 
 
 def order_id_print(order_id):
@@ -44,17 +45,23 @@ def order_by_date_print(order_date):
         if hasattr(order.customer, 'company_name'):
             print(f'Order made by company {order.customer.company_name}, contact name {order.customer.customer_first_name}\n'
                   f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
-                  f'Made on {order.order_date} \n'
-                  f'Containing {order.order_details} \n'
-                  f' --------------------------- ')
-
+                  f'Made on {order.order_date} \n')
+            if hasattr(order, 'order_detail'):
+                for detail in order.order_detail:
+                    print(f'Containing {detail["quantity"]} of {detail["spare_part_id"]}  \n')
+            else:
+                print(f'No details on this order. \n'
+                      f' --------------------------- ')
         else:
             print(f'Order made by {order.customer.customer_first_name} {order.customer.customer_last_name},\n'
                 f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
-                f'Made on {order.order_date} \n'
-                f'Containing {order.order_details} \n'
-                f' --------------------------- ')
-
+                f'Made on {order.order_date} \n')
+            if hasattr(order, 'order_detail'):
+                for detail in order.order_detail:
+                    print(f'Containing {detail["quantity"]} of {detail["spare_part_id"]}  \n')
+            else:
+                print(f'No details on this order. \n'
+                      f' --------------------------- ')
 
 
 def get_order_details(existing=False):
