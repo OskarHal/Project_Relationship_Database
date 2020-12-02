@@ -6,3 +6,4 @@ docker-compose.yml
 __pycache__/
 app/MongoDB/db/db_settings/
 dump/
+

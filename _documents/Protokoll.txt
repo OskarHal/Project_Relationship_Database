@@ -122,6 +122,12 @@ Läsa på självständigt om MongoDb.
 Vi har planerat och gjort klart vårt diagram för MongoDB. 
 Imorgon så börjar vi att konvertera från föregående till MongoDB. 
 
+2020-12-01
+Vi satt hela dagen tillsammans och migrerade data.
+
+2020-12-02
+Idag så ska vi börja med att få till koppling mellan vårt program och MongoDB. Vi kommer att börja med customer
+och att åter få igång select, update, insert och delete-funktioner. Rensa bort alla gamla id:n. 
 
 
 
