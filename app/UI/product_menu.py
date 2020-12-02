@@ -179,7 +179,7 @@ def edit_menu(product):
 def edit_product_handler(product: SparePart, attribute_name: str):
     new_value = input_int_validation(input_description="Enter new data: ")
     success = update_product(product=product, attribute_name=attribute_name, new_value=new_value)
-    print_success_message(success=success, print_function=product.print_all_information_with_relationships)
+    print(product)
 
 
 def search_products_by_description_pattern():
