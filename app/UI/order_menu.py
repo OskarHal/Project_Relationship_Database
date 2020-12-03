@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from Controllers.employee_controller import get_employee_by_first_name
 from Controllers.order_controller import create_order, find_order_by_id, find_order_by_date
@@ -49,7 +49,7 @@ def order_by_date_print(order_date):
                   f'Made on {order.order_date} \n')
             if hasattr(order, 'order_detail'):
                 for detail in order.order_detail:
-                    print(f'Containing {detail["quantity"]} of {detail["spare_part_id"]}  \n')
+                    print(f'Containing {detail["quantity"]}, {detail["spare_part"].description}  \n')
             else:
                 print(f'No details on this order. \n'
                       f' --------------------------- ')
@@ -59,7 +59,7 @@ def order_by_date_print(order_date):
                 f'Made on {order.order_date} \n')
             if hasattr(order, 'order_detail'):
                 for detail in order.order_detail:
-                    print(f'Containing {detail["quantity"]} of {detail["spare_part_id"]}  \n')
+                    print(f'Containing {detail["quantity"]}, {detail["spare_part"].description}  \n')
             else:
                 print(f'No details on this order. \n'
                       f' --------------------------- ')
@@ -72,8 +72,8 @@ def get_order_details(existing=False):
     # store_id = input("Enter your store id")
     if existing:
         customer_id = input_int_validation("Enter customer_id: ")
-        new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
-        return new_order
+        #new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
+        #return new_order
     else:
         print()
         return {
@@ -159,7 +159,7 @@ def order_menu():
             order_id_print(order_id)
         elif selection == "3":
             order_date = input("Enter order date (yyyy-mm-dd): ")
-            date_time = datetime.datetime.strptime(order_date, '%Y-%m-%d')
+            date_time = datetime.strptime(order_date, '%Y-%m-%d')
             order_by_date_print(date_time)
         elif selection == "0":
             break
