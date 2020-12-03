@@ -62,8 +62,7 @@ def manipulation_data(customer):
         if selection == "1":
             edit_data(customer)
         elif selection == "2":
-            print(delete_message(cc.delete_customer(customer)))
-            continue
+            delete_message(cc.delete_customer(customer))
         elif selection == "3":
             pass
         elif selection == "4":
@@ -111,7 +110,7 @@ def select_customer_menu():
 
         if selection == "2":
 
-            selected_first_name = input("> Enter First name").lower()
+            selected_first_name = input("> Enter First name")
             customer = cc.get_customer_by_first_name(selected_first_name)
             print(customer)
             manipulation_data(customer)
@@ -259,6 +258,7 @@ def customers_menu():
                 print(customer)
         elif selection == "2":
             select_customer_menu()
+
         elif selection == "3":
             add_customer_menu()
         elif selection == "0":

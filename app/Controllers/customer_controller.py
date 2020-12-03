@@ -14,11 +14,15 @@ def get_customer_by_id(selected_id):
 
 
 def get_customer_by_first_name(selected_first_name):
-    return pcr.get_customer_by_first_name(selected_first_name)
+    # ----MYSQL-----
+    #return pcr.get_customer_by_first_name(selected_first_name)
+    return mcr.get_customer_by_first_name(selected_first_name)
 
 
 def get_customer_by_company_name(selected_company_name):
-    return ccr.get_customer_by_company_name(selected_company_name)
+    # ----MYSQL-----
+    #return ccr.get_customer_by_company_name(selected_company_name)
+    return mcr.get_customer_by_company_name(selected_company_name)
 
 
 def edit_new_email(customer, edit_email):
@@ -46,7 +50,10 @@ def add_company_customer(customer):
 
 
 def delete_customer(customer):
-    if customer[0].customer.customer_type == 1:
-        return pcr.delete_customer(customer)
-    elif customer[0].customer.customer_type == 2:
-        return ccr.delete_customer(customer)
+    return mcr.delete_customer(customer)
+    # ----MYSQL-----
+    # if customer[0].customer.customer_type == 1:
+    #     return pcr.delete_customer(customer)
+    # elif customer[0].customer.customer_type == 2:
+    #     return ccr.delete_customer(customer)
+
