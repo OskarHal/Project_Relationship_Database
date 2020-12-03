@@ -5,11 +5,7 @@ from MongoDB.Models.orders import Order
 
 
 def create_order(new_order):
-    try:
-        session.add(new_order)
-        session.commit()
-    except:
-        session.rollback()
+    new_order.save()
 
 
 def find_order_by_id(order_id):
