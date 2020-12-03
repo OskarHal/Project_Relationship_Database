@@ -1,5 +1,6 @@
 import Data.Repository.company_customer_repository as ccr
 import Data.Repository.private_customer_repository as pcr
+import MongoDB.Repository.customers_repository as mcr
 
 
 def get_all_customers():
@@ -35,7 +36,9 @@ def edit_new_phone_number(customer, edit_phone_number):
 
 
 def add_private_customer(customer):
-    pcr.add_private_customer(customer)
+    mcr.add_customer(customer)
+    # ----MYSQL-----
+    # pcr.add_private_customer(customer)
 
 
 def add_company_customer(customer):
