@@ -1,10 +1,10 @@
 from Controllers.customer_controller import get_all_customers, get_customer_by_id
 from Data.Models.company_customer import CompanyCustomer
-from Data.Models.customer import Customer
+# from Data.Models.customer import Customer
 from Data.Models.customer_cars import CustomerCar
 from Data.Models.private_customers import PrivateCustomer
 import Controllers.customer_controller as cc
-
+from MongoDB.Models.customers import Customer
 
 ERROR_MESSAGE_ONE = "There is no entry in the database "
 ERROR_MESSAGE_TWO = " Your type of input is wrong "
@@ -147,18 +147,26 @@ def add_private_customer(customer_type, order=False):
         print("Private Customer".center(30, " "))
         print("".center(30, "="))
 
-        priv_customer_dict = {f"private_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
+        # ---MYSQL STUFF---
+        # priv_customer_dict = {f"private_customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
+        #                       ["First name", "Last name", "Phone", "Email"]}
+
+        priv_customer_dict = {f"customer_{i.replace(' ', '_').lower()}": input(f"{i}: ") for i in
                               ["First name", "Last name", "Phone", "Email"]}
 
         customer_car_dict = add_customer_car()
         verify_information(priv_customer_dict, customer_car_dict)
+        priv_customer_dict.update({"cars": [customer_car_dict]})
 
         verification = input("Is the information entered correct?\n(1) YES\n(2) NO\n:>  ")
 
         if verification == "1":
-            private_customer = PrivateCustomer(**priv_customer_dict)
-            private_customer.customer = Customer(customer_type=customer_type)
-            private_customer.customer.cars.append(CustomerCar(**customer_car_dict))
+            private_customer = Customer(priv_customer_dict)
+
+            # ---MYSQL STUFF---
+            # private_customer = PrivateCustomer(**priv_customer_dict)
+            # private_customer.customer = Customer(customer_type=customer_type)
+            # private_customer.customer.cars.append(CustomerCar(**customer_car_dict))
 
             if order:
                 return private_customer

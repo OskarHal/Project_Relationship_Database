@@ -9,7 +9,7 @@ from Data.db import session
 from MongoDB.Models.suppliers import Supplier as MongoSupplier
 from MongoDB.Models.stores import Store as MongoStore
 from MongoDB.Models.employees import Employee as MongoEmployee
-from MongoDB.Models.customers import Customers as MongoCustomer
+from MongoDB.Models.customers import Customer as MongoCustomer
 from MongoDB.Models.spare_parts import SparePart as MongoSparePart
 from MongoDB.Models.manufacturers import Manufacturer as MongoManufacturer
 from MongoDB.Models.orders import Order as MongoOrder
