@@ -1,9 +1,12 @@
 import Data.Repository.employees_repository as er
 import Data.Repository.customer_cars_repository as ccr
+import MongoDB.Repository.employees_repository as mer
 
 
 def get_all_employees():
-    return er.get_all_employees()
+    return mer.get_all_employees()
+    # ----MySQL----
+    # return er.get_all_employees()
 
 
 def get_employee_by_id(selection):
@@ -24,3 +27,7 @@ def theft(thief):
         valuables.append(valuables[1].owner.comp_customer[0].company_customer_company_name)
 
     return valuables
+
+
+def get_employee_by_first_name(selection):
+    return mer.get_employee_by_first_name(selection)

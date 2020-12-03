@@ -60,11 +60,16 @@ def employee_edit_menu(employee):
         selection = input_int_validation("Menu selection")
 
         if selection == 1:
-            print(
-                ("\n".join(f"Order {count} at {order.order_date}".center(30, " ") +
-                           f"\n{details.spare_part.description} \t quantity: {details.quantity}"
-                           for count, order in enumerate(employee.orders, 1) for details in order.order_lines))
-            )
+            # ----MySQL----
+            # print(
+            #     ("\n".join(f"Order {count} at {order.order_date}".center(30, " ") +
+            #                f"\n{details.spare_part.description} \t quantity: {details.quantity}"
+            #                for count, order in enumerate(employee.orders, 1) for details in order.order_lines))
+            # )
+            print("\n".join(f"Order {count} at {order.order_date}".center(30, " ") +
+                            f"\n{details['spare_part_id']} \t quantity: {details['quantity']}"
+                            for count, order in enumerate(employee.orders, 1) for details in order.order_detail))
+
         elif selection == 2:
             fire_employee(employee)
 
@@ -78,14 +83,21 @@ def select_employee_menu():
         print("=" * 30)
         print("0. Exit")
 
-        selection = input_int_validation("Enter employee ID")
+        # ----MySQL----
+        # selection = input_int_validation("Enter employee ID")
 
-        if selection == 0:
+        selection = input("Enter employee first name: ")
+
+        if selection == "0":
             break
-
-        employee = ec.get_employee_by_id(selection)
-        employee_edit_menu(employee)
-
+        # ----MySQL----
+        # employee = ec.get_employee_by_id(selection)
+        employee = ec.get_employee_by_first_name(selection)
+        if employee is not None:
+            employee_edit_menu(employee)
+        else:
+            print(f"There's no one named {selection} working in our stores")
+            continue
         break
 
 
@@ -103,8 +115,8 @@ def employee_menu():
         if selection == 1:
             employees = ec.get_all_employees()
             print(
-                "\n".join(f"{employee.employee_name} {employee.employee_lastname} works at our office in "
-                          f"{employee.store.store_name}" for employee in employees)
+                "\n".join(f"{i}. {employee.employee_name} {employee.employee_lastname} works at our office in "
+                          f"{employee.store.store_name}" for i, employee in enumerate(employees, 1))
             )
 
         elif selection == 2:
