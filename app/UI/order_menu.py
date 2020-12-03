@@ -1,5 +1,6 @@
 import datetime
 
+from Controllers.employee_controller import get_employee_by_first_name
 from Controllers.order_controller import create_order, find_order_by_id, find_order_by_date
 from Controllers.product_controller import get_all_products
 from UI.customer_menu import *
@@ -66,9 +67,8 @@ def order_by_date_print(order_date):
 
 def get_order_details(existing=False):
     print("===================")
-    employee_id = input("Enter your employee number: ")
-    employee = find_employee_by_id(employee_id)
-    mongo_order = MongoOrder
+    employee_name = input("Enter your name: ")
+    employee = get_employee_by_first_name(employee_name)
     # store_id = input("Enter your store id")
     if existing:
         customer_id = input_int_validation("Enter customer_id: ")
@@ -76,7 +76,9 @@ def get_order_details(existing=False):
         return new_order
     else:
         print()
-        return mongo_order({'employee_id': employee._id, 'store_id': employee.store_id})
+        return {
+            'employee_id': employee._id, 'store_id': employee.store_id, 'order_date': datetime.datetime.utcnow()
+        }
 
 
 #lägga till flera produkter
@@ -97,7 +99,7 @@ def get_product_in_order():
         if spare_part_id == "done":
             break
         quantity = input_int_validation("How many of said product: ")
-        line = OrderDetail(spare_part_id=spare_part_id, quantity=quantity)
+        line = {'spare_part_id': spare_part_id, 'quantity': quantity}
         order_details.append(line)
     return order_details
 
@@ -108,11 +110,11 @@ def create_new_order(customer_type):
         get_product_in_order(new_order)
         create_order(new_order)
     elif customer_type == "2":
-        mongo_order = get_order_details()
+        order_dict = get_order_details()
         order_details = get_product_in_order()
-        mongo_order['order_detail'] = order_details
         customer = add_private_customer(1, order=True)
-        mongo_order['customer_id'] = customer._id
+        order_dict.update({'order_detail': order_details, 'customer_id': customer._id})
+        mongo_order = MongoOrder(order_dict)
         create_order(mongo_order)
         # # -----MySQL-----
         # new_order = get_order_details()
@@ -121,11 +123,18 @@ def create_new_order(customer_type):
         # get_product_in_order(new_order)
         # create_order(new_order)
     elif customer_type == "3":
-        new_order = get_order_details()
+        order_dict = get_order_details()
+        order_details = get_product_in_order()
         customer = add_company_customer(2, order=True)
-        new_order.customer = customer.customer
-        get_product_in_order(new_order)
-        create_order(new_order)
+        order_dict.update({'order_detail': order_details, 'customer_id': customer._id})
+        mongo_order = MongoOrder(order_dict)
+        create_order(mongo_order)
+        # #-----MySQL-----
+        # new_order = get_order_details()
+        # customer = add_company_customer(2, order=True)
+        # new_order.customer = customer.customer
+        # get_product_in_order(new_order)
+        # create_order(new_order)
     else:
         print("No such option exists. Try again")
 

@@ -204,6 +204,7 @@ def add_company_customer(customer_type, order=False):
             company_customer.customer.cars.append(CustomerCar(**customer_car_dict))
 
             if order:
+                cc.add_company_customer(company_customer)
                 return company_customer
 
             else:

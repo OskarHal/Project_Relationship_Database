@@ -1,4 +1,3 @@
-from MongoDB.Models.stores import Store
 import MongoDB.Models.orders as mo
 from MongoDB.db import Document, db
 from MongoDB.Models.stores import Store
