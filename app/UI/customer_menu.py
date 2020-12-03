@@ -169,8 +169,8 @@ def add_private_customer(customer_type, order=False):
             # private_customer.customer.cars.append(CustomerCar(**customer_car_dict))
 
             if order:
+                cc.add_private_customer(private_customer)
                 return private_customer
-
             else:
                 cc.add_private_customer(private_customer)
                 print("Customer saved!".center(30, "-"))

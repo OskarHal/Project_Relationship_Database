@@ -1,6 +1,7 @@
 from MongoDB.Models.stores import Store
 import MongoDB.Models.orders as mo
 from MongoDB.db import Document, db
+from MongoDB.Models.stores import Store
 
 
 class Employee(Document):
@@ -13,3 +14,4 @@ class Employee(Document):
     @property
     def orders(self):
         return mo.Order.find(employee_id=self._id)
+

@@ -6,6 +6,7 @@ from UI.customer_menu import *
 from Data.Models.orders import Order
 from Data.Models.order_details import OrderDetail
 from UI.product_menu import input_int_validation
+from MongoDB.Models.orders import Order as MongoOrder
 
 
 def order_id_print(order_id):
@@ -44,53 +45,61 @@ def order_by_date_print(order_date):
         if hasattr(order.customer, 'company_name'):
             print(f'Order made by company {order.customer.company_name}, contact name {order.customer.customer_first_name}\n'
                   f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
-                  f'Made on {order.order_date} \n'
-                  f'Containing {order.order_details} \n'
-                  f' --------------------------- ')
-
+                  f'Made on {order.order_date} \n')
+            if hasattr(order, 'order_detail'):
+                for detail in order.order_detail:
+                    print(f'Containing {detail["quantity"]} of {detail["spare_part_id"]}  \n')
+            else:
+                print(f'No details on this order. \n'
+                      f' --------------------------- ')
         else:
             print(f'Order made by {order.customer.customer_first_name} {order.customer.customer_last_name},\n'
                 f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
-                f'Made on {order.order_date} \n'
-                f'Containing {order.order_details} \n'
-                f' --------------------------- ')
-
+                f'Made on {order.order_date} \n')
+            if hasattr(order, 'order_detail'):
+                for detail in order.order_detail:
+                    print(f'Containing {detail["quantity"]} of {detail["spare_part_id"]}  \n')
+            else:
+                print(f'No details on this order. \n'
+                      f' --------------------------- ')
 
 
 def get_order_details(existing=False):
     print("===================")
-    employee_id = input_int_validation("Enter your employee number: ")
-    store_id = input_int_validation("Enter your store id")
-
+    employee_id = input("Enter your employee number: ")
+    employee = find_employee_by_id(employee_id)
+    mongo_order = MongoOrder
+    # store_id = input("Enter your store id")
     if existing:
         customer_id = input_int_validation("Enter customer_id: ")
         new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
         return new_order
     else:
-        new_order = Order(employee_id=employee_id, store_id=store_id)
-        return new_order
+        print()
+        return mongo_order({'employee_id': employee._id, 'store_id': employee.store_id})
 
 
 #lägga till flera produkter
-def get_product_in_order(new_order):
-    print(f"Products".center(45, '#'))
-    products = get_all_products()
-    for product in products:
-        print(f"Id: ".ljust(30), end='|')
-        print(f"{product.spare_part_id}")
-        print(f"Description: ".ljust(30), end='|')
-        print(f"{product.description}")
-        print(f"".center(45, '-'))
-    print()
+def get_product_in_order():
+    order_details = []
+    # print(f"Products".center(45, '#'))
+    # products = get_all_products()
+    # for product in products:
+    #     print(f"Id: ".ljust(30), end='|')
+    #     print(f"{product.spare_part_id}")
+    #     print(f"Description: ".ljust(30), end='|')
+    #     print(f"{product.description}")
+    #     print(f"".center(45, '-'))
+    # print()
     while True:
         print("What product id? Enter 'done' to complete the order.")
         spare_part_id = input("Enter product id: ")
-        if spare_part_id.lower() == "done":
+        if spare_part_id == "done":
             break
         quantity = input_int_validation("How many of said product: ")
         line = OrderDetail(spare_part_id=spare_part_id, quantity=quantity)
-        new_order.order_lines.append(line)
-    return new_order
+        order_details.append(line)
+    return order_details
 
 
 def create_new_order(customer_type):
@@ -99,11 +108,18 @@ def create_new_order(customer_type):
         get_product_in_order(new_order)
         create_order(new_order)
     elif customer_type == "2":
-        new_order = get_order_details()
+        mongo_order = get_order_details()
+        order_details = get_product_in_order()
+        mongo_order['order_detail'] = order_details
         customer = add_private_customer(1, order=True)
-        new_order.customer = customer.customer
-        get_product_in_order(new_order)
-        create_order(new_order)
+        mongo_order['customer_id'] = customer._id
+        create_order(mongo_order)
+        # # -----MySQL-----
+        # new_order = get_order_details()
+        # customer = add_private_customer(1, order=True)
+        # new_order.customer = customer.customer
+        # get_product_in_order(new_order)
+        # create_order(new_order)
     elif customer_type == "3":
         new_order = get_order_details()
         customer = add_company_customer(2, order=True)
