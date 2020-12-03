@@ -17,14 +17,17 @@ from UI.main_menu import main_menu
 from mysql_to_mongo_migration.migration_functions import fix_suppliers, fix_customers, fix_stores, fix_employees, \
     fix_spare_parts, fix_orders, cleaning_ids
 from mysql_to_mongo_migration.manufacturers_migration import fix_manufacturers
+import datetime
 
 
 def main():
+    #TODO sparka Anakin, ta bort honom från mongoDB sen är det klart!
+
     # cleaning_ids()
     # fix_manufacturers()
     # fix_stores()
     # fix_customers()
-    # fix_suppliers()
+    fix_suppliers()
     # fix_employees()
     # fix_spare_parts()
     # fix_orders()

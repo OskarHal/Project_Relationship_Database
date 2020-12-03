@@ -8,13 +8,22 @@ def fire_message(employee, reason):
 
     elif reason == 2:
         print(f"{employee.employee_lastname} was let go because he just couldn't keep his mouth shut")
+    # ----MySQL----
+    # elif reason == 3:
+    #     valuables = ec.theft(employee)
+    #     print(
+    #         f"Ouch, looks like you fired {employee.employee_name} {employee.employee_lastname} and he wasn't happy"
+    #         f" with the reason you gave gim. \nHe ran off in your customer {valuables[2]}s"
+    #         f" {valuables[1].customer_car_brand} with {valuables[0][0]} {valuables[0][1]}s from your office in "
+    #         f"{employee.store.store_name}"
+    #     )
 
     elif reason == 3:
-        valuables = ec.theft(employee)
+        amount, item, customer = ec.theft(employee)
         print(
             f"Ouch, looks like you fired {employee.employee_name} {employee.employee_lastname} and he wasn't happy"
-            f" with the reason you gave gim. \nHe ran off in your customer {valuables[2]}s"
-            f" {valuables[1].customer_car_brand} with {valuables[0][0]} {valuables[0][1]}s from your office in "
+            f" with the reason you gave gim. \nHe ran off in your customer {customer.customer_first_name}s"
+            f" {customer.cars[0]['customer_car_brand']} with {amount} {item.description}s from your office in "
             f"{employee.store.store_name}"
         )
 
