@@ -1,5 +1,6 @@
 import Data.Repository.order_repository as ord_repo
-from Data.Models.orders import Order
+from MongoDB.Models.orders import Order
+import MongoDB.Repository.order_repository as mongo_repo
 
 
 def create_order(new_order):
@@ -20,4 +21,4 @@ def find_order_by_id(order_id) -> Order:
 
 
 def find_order_by_date(order_date) -> list:
-    return ord_repo.find_order_by_date(order_date)
+    return mongo_repo.find_order_by_date(order_date)

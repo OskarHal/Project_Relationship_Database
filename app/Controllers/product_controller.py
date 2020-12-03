@@ -1,13 +1,14 @@
 from Data.Models.spare_parts import SparePart
 from Data.Repository import products_repository as pr
-
+from MongoDB.Repository import product_repository as mpr
 
 def get_all_products() -> list:
     return pr.get_all_products()
 
 
-def get_product_by_product_nr(product_nr: str) -> SparePart:
-    return pr.get_product_by_product_nr(product_nr)
+def get_product_by_product_nr(product_nr: str):
+    # return pr.get_product_by_product_nr(product_nr)
+    return mpr.get_product_by_product_nr(product_nr=product_nr)
 
 
 def get_products_by_product_description_pattern(description_pattern: str) -> {}:
@@ -20,7 +21,8 @@ def delete_product(product) -> bool:
 
 
 def update_product(product, attribute_name, new_value):
-    return pr.update_product(product=product, attribute_name=attribute_name, new_value=new_value)
+    # return pr.update_product(product=product, attribute_name=attribute_name, new_value=new_value)
+    return mpr.update_product(product=product, attribute_name=attribute_name, new_value=new_value)
 
 def add_product(product):
     return pr.add_product(product)
