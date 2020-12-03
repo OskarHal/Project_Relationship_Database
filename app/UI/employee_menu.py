@@ -67,7 +67,7 @@ def employee_edit_menu(employee):
             #                for count, order in enumerate(employee.orders, 1) for details in order.order_lines))
             # )
             print("\n".join(f"Order {count} at {order.order_date}".center(30, " ") +
-                            f"\n{details['spare_part_id']} \t quantity: {details['quantity']}"
+                            f"\n{details['spare_part'].description} \t quantity: {details['quantity']}"
                             for count, order in enumerate(employee.orders, 1) for details in order.order_detail))
 
         elif selection == 2:
