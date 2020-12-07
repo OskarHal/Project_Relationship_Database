@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"916ad439a0434f58a0915ed25ec38eb3","collectionName":"spare_parts"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"6ede9ee7b0254d6fba91712fa7b4d4dc","collectionName":"spare_parts"}

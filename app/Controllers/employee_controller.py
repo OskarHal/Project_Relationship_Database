@@ -15,7 +15,9 @@ def get_employee_by_id(selection):
 
 
 def fire_employee(employee):
-    return er.fire_employee(employee)
+    return mer.fire_employee(employee)
+    # ---MySQL---
+    # return er.fire_employee(employee)
 
 
 def theft(thief):
@@ -33,3 +35,7 @@ def theft(thief):
 
 def get_employee_by_first_name(selection):
     return mer.get_employee_by_first_name(selection)
+
+
+def save_employee(employee_dict):
+    return mer.save_employee(employee_dict)

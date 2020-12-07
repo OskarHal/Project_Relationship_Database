@@ -52,8 +52,3 @@ class Document(dict, ABC):
     @classmethod
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
-
-    @classmethod
-    def find_embedded(cls, embedded_field, value):
-        return [cls(item) for item in cls.collection.find({embedded_field:value})]
-
