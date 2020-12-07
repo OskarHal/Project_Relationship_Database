@@ -6,8 +6,22 @@ def get_product_by_product_nr(product_nr: str):
 
 
 def update_product(product: MongoSparePart, attribute_name, new_value):
-    product.__setattr__(attribute_name, new_value)
-    print(product.order_quantity)
 
+    product[attribute_name] = new_value
+    # product.__dict__[attribute_name] = new_value
+    # product.__dict__.update({attribute_name: new_value})
+    # product.__setattr__(attribute_name, new_value)
+
+    print(product.order_quantity)
     product.save()
 
+
+def delete_product(product):
+    success = False
+    try:
+        product.delete(_id=product._id)
+        success = True
+    except:
+        print("Something went wrong...")
+    finally:
+        return success
