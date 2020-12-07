@@ -77,6 +77,10 @@ def fix_employees():
     for employee in employees:
         as_dict = employee.__dict__
         as_dict["store_id"] = MongoStore.find(store_id=employee.store_id).first_or_none()._id
+        as_dict["employee_first_name"] = employee.employee_name
+        as_dict["employee_last_name"] = employee.employee_lastname
+        del as_dict["employee_name"]
+        del as_dict["employee_lastname"]
         del as_dict["_sa_instance_state"]
 
         mongo_employee = MongoEmployee(as_dict)
@@ -141,6 +145,10 @@ def fix_orders():
         del as_dict["_sa_instance_state"]
 
         mongo_order = MongoOrder(as_dict)
+
+        for ol in mongo_order.order_detail:
+            del ol["spare_part"]
+
         mongo_order.save()
 
 

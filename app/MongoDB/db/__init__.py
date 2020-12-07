@@ -59,6 +59,3 @@ class Document(dict, ABC):
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
 
-    def update(self):
-        print("Hi")
-

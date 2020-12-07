@@ -17,9 +17,12 @@ from UI.main_menu import main_menu
 from mysql_to_mongo_migration.migration_functions import fix_suppliers, fix_customers, fix_stores, fix_employees, \
     fix_spare_parts, fix_orders, cleaning_ids
 from mysql_to_mongo_migration.manufacturers_migration import fix_manufacturers
+import datetime
 
+from MongoDB.Models.customers import Customer as MC
 
 def main():
+
     # cleaning_ids()
     # fix_manufacturers()
     # fix_stores()
@@ -28,7 +31,7 @@ def main():
     # fix_employees()
     # fix_spare_parts()
     # fix_orders()
-    # Base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
     main_menu()
 
 if __name__ == "__main__":
