@@ -1,6 +1,6 @@
-import Data.Repository.order_repository as ord_repo
 from MongoDB.Models.orders import Order
 import MongoDB.Repository.order_repository as mongo_repo
+from MongoDB.Repository.product_repository import get_product_by_id
 
 
 def create_order(new_order):
@@ -16,11 +16,14 @@ def create_order(new_order):
     #     else:
     #         ord_repo.update_stock(old_stock, line.quantity)
 
+
+    # for line in new_order.order_detail:
+    #     part = get_product_by_id(line["spare_part_id"])
+    #     if part.stores.store_id == new_order.store_id:
+    #         if part.stores["quantity"] - line.quantity < 1:
+    #             print("this is out of stock")
+
     mongo_repo.create_order(new_order)
-
-
-def find_order_by_id(order_id) -> Order:
-    return ord_repo.find_order_by_id(order_id)
 
 
 def find_order_by_date(order_date) -> list:

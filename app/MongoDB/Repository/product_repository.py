@@ -11,3 +11,6 @@ def update_product(product: MongoSparePart, attribute_name, new_value):
 
     product.save()
 
+
+def get_product_by_id(product_id: str):
+    return MongoSparePart.find(_id=product_id).first_or_none()

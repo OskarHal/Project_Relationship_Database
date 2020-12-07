@@ -1,7 +1,8 @@
 from datetime import datetime
+from bson import ObjectId
 
 from Controllers.employee_controller import get_employee_by_first_name
-from Controllers.order_controller import create_order, find_order_by_id, find_order_by_date
+from Controllers.order_controller import create_order, find_order_by_date
 from Controllers.product_controller import get_all_products
 from UI.customer_menu import *
 from Data.Models.orders import Order
@@ -11,19 +12,21 @@ from MongoDB.Models.orders import Order as MongoOrder
 
 
 def order_id_print(order_id):
-    order = find_order_by_id(order_id)
-    print("===================")
-    if order.customer.customer_type == 1:
-        print("test")
-        print(f'Order by customer {order.customer.comp_customer[0].company_customer_first_name} '
-              f'{order.customer.comp_customer[0].company_customer_last_name},'
-              f'employee {order.employees.employee_name} '
-              f'in store {order.store.store_name} made on {order.order_date}')
-    elif order.customer.customer_type == 2:
-        print(f'Order by customer {order.customer.priv_customer[0].private_customer_first_name} '
-              f'{order.customer.priv_customer[0].private_customer_last_name}, '
-              f'employee {order.employees.employee_name} '
-              f'in store {order.store.store_name} made on {order.order_date}')
+    pass
+    #----MySQL----
+    # order = find_order_by_id(order_id)
+    # print("===================")
+    # if order.customer.customer_type == 1:
+    #     print("test")
+    #     print(f'Order by customer {order.customer.comp_customer[0].company_customer_first_name} '
+    #           f'{order.customer.comp_customer[0].company_customer_last_name},'
+    #           f'employee {order.employees.employee_name} '
+    #           f'in store {order.store.store_name} made on {order.order_date}')
+    # elif order.customer.customer_type == 2:
+    #     print(f'Order by customer {order.customer.priv_customer[0].private_customer_first_name} '
+    #           f'{order.customer.priv_customer[0].private_customer_last_name}, '
+    #           f'employee {order.employees.employee_name} '
+    #           f'in store {order.store.store_name} made on {order.order_date}')
 
 
 def order_by_date_print(order_date):
@@ -46,7 +49,7 @@ def order_by_date_print(order_date):
         if hasattr(order.customer, 'company_name'):
             print(f'Order made by company {order.customer.company_name}, contact name {order.customer.customer_first_name}\n'
                   f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
-                  f'Made on {order.order_date} \n')
+                  f'Made on {order.order_date}')
             if hasattr(order, 'order_detail'):
                 for detail in order.order_detail:
                     print(f'Containing {detail["quantity"]}, {detail["spare_part"].description}  \n')
@@ -56,10 +59,10 @@ def order_by_date_print(order_date):
         else:
             print(f'Order made by {order.customer.customer_first_name} {order.customer.customer_last_name},\n'
                 f'Handled by {order.employee.employee_name} {order.employee.employee_lastname} in {order.store.store_name}\n'
-                f'Made on {order.order_date} \n')
+                f'Made on {order.order_date}')
             if hasattr(order, 'order_detail'):
                 for detail in order.order_detail:
-                    print(f'Containing {detail["quantity"]}, {detail["spare_part"].description}  \n')
+                    print(f'Containing {detail["quantity"]}, {detail["spare_part"].description}\n')
             else:
                 print(f'No details on this order. \n'
                       f' --------------------------- ')
@@ -75,9 +78,9 @@ def get_order_details(existing=False):
         #new_order = Order(customer_id=customer_id, employee_id=employee_id, store_id=store_id)
         #return new_order
     else:
-        print()
+        date = datetime.utcnow()
         return {
-            'employee_id': employee._id, 'store_id': employee.store_id, 'order_date': datetime.datetime.utcnow()
+            'employee_id': employee._id, 'store_id': employee.store_id, 'order_date': datetime(year=date.year, month=date.month, day=date.day)
         }
 
 
@@ -94,12 +97,12 @@ def get_product_in_order():
     #     print(f"".center(45, '-'))
     # print()
     while True:
-        print("What product id? Enter 'done' to complete the order.")
+        print("What product nr? Enter 'done' to complete the order.")
         spare_part_id = input("Enter product id: ")
         if spare_part_id == "done":
             break
         quantity = input_int_validation("How many of said product: ")
-        line = {'spare_part_id': spare_part_id, 'quantity': quantity}
+        line = {'spare_part_id': ObjectId(spare_part_id), 'quantity': quantity}
         order_details.append(line)
     return order_details
 
@@ -126,7 +129,7 @@ def create_new_order(customer_type):
         order_dict = get_order_details()
         order_details = get_product_in_order()
         customer = add_company_customer(2, order=True)
-        order_dict.update({'order_detail': order_details, 'customer_id': customer._id})
+        order_dict.update({'customer_id': customer._id, 'order_detail': order_details})
         mongo_order = MongoOrder(order_dict)
         create_order(mongo_order)
         # #-----MySQL-----
@@ -143,8 +146,7 @@ def order_menu():
     while True:
         print("===================")
         print("1. Create order")
-        print("2. Find order by id")
-        print("3. Find order by date")
+        print("2. Find order by date")
         print("0. Exit")
         selection = input("> ")
         print()
@@ -155,9 +157,6 @@ def order_menu():
             selection = input("> ")
             create_new_order(selection)
         elif selection == "2":
-            order_id = input("Enter order id: ")
-            order_id_print(order_id)
-        elif selection == "3":
             order_date = input("Enter order date (yyyy-mm-dd): ")
             date_time = datetime.strptime(order_date, '%Y-%m-%d')
             order_by_date_print(date_time)
