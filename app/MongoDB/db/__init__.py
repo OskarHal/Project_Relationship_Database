@@ -36,6 +36,12 @@ class Document(dict, ABC):
     def delete_field(self, field):
         self.collection.update({'_id': self._id}, {"$unset": {field: ""}})
 
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
+    def __setitem__(self, key, item):
+        self.__dict__[key] = item
+
     @classmethod
     def insert_many(cls, items):
         for item in items:
@@ -52,4 +58,7 @@ class Document(dict, ABC):
     @classmethod
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
+
+    def update(self):
+        print("Hi")
 

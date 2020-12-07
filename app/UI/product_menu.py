@@ -6,7 +6,7 @@ from Controllers.product_controller import get_product_by_product_nr, delete_pro
 
 from Data.Models.spare_part_stores import SparePartStore
 from Data.Models.spare_parts import SparePart
-
+from MongoDB.Models.spare_parts import SparePart as MongoSparePart
 
 def add_existing_car_models():
     chosen_car_models = []
@@ -80,7 +80,7 @@ def add_product_interface():
                             "Estimated time of arrival"
                         ]}
 
-    new_product = SparePart(**add_product_dict)
+    new_product = MongoSparePart(**add_product_dict)
     new_product.manufacturer, new_product.supplier = add_manufacturer(), add_supplier()
     [new_product.car_models.append(car_model) for car_model in add_existing_car_models()]
     [new_product.stores.append(store) for store in add_spare_part_stores()]
@@ -129,7 +129,7 @@ def select_product_by_number():
         return product
 
 
-def choose_action_for_product_menu(product):
+def choose_action_for_product_menu(product: MongoSparePart):
     while True:
         print("Select what you want to do?")
         print("1. Show all information")
@@ -140,11 +140,11 @@ def choose_action_for_product_menu(product):
         selection = input("> ")
 
         if selection == "1":
-            product.print_all_information_with_relationships()
+            print(product.__repr__())
         if selection == "2":
             edit_menu(product)
         if selection == "3":
-            print_success_message(delete_product(product))
+            print_success_message(success=delete_product(product))
             product_menu()
         if selection == "0":
             break
