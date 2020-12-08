@@ -83,38 +83,68 @@ def employee_edit_menu(employee):
 
         elif selection == 2:
             fire_employee(employee)
+            break
 
         elif selection == 0:
             break
+
+
+def find_employee_by_store():
+    store = search_store()
+    print("Employees working in this store: ")
+    print("\n".join(f"{i}. {employee.employee_first_name} {employee.employee_last_name}"
+                    for i, employee in enumerate(store.employees, 1)))
+
+    selection = input_int_validation("\nChoose an employee")
+
+    return store.employees[selection - 1]
 
 
 def select_employee_menu():
     while True:
         print("Select employee menu".center(30, " "))
         print("=" * 30)
+        print("Search employee by:")
+        print("1. First name")
+        print("2. Store")
         print("0. Exit")
 
         # ----MySQL----
         # selection = input_int_validation("Enter employee ID")
 
-        selection = input("Enter employee first name: ")
+        selection = input_int_validation("Menu selection")
 
-        if selection == "0":
+        if selection == 0:
             break
         # ----MySQL----
         # employee = ec.get_employee_by_id(selection)
-        employee = ec.get_employee_by_first_name(selection)
-        if employee is not None:
+
+        if selection == 1:
+            selection = input("Enter employee first name: ")
+            employee = ec.get_employee_by_first_name(selection)
+
+            if employee is not None:
+                employee_edit_menu(employee)
+            else:
+                print(f"There's no one named {selection} working in our stores")
+                continue
+
+        if selection == 2:
+            employee = find_employee_by_store()
             employee_edit_menu(employee)
+
         else:
-            print(f"There's no one named {selection} working in our stores")
-            continue
-        break
+            print(f"\nMenu selection {selection} is not a valid option!\n")
 
 
-def search_store(name):
-    print(f"Where should {name} work?".center(30, " "))
-    print("=" * 30)
+def search_store(name=None):
+    if name is not None:
+        print(f"Where should {name} work?".center(30, " "))
+        print("=" * 30)
+
+    else:
+        print(f"Choose a store".center(30, " "))
+        print("=" * 30)
 
     stores = sc.get_all_stores()
 
@@ -122,18 +152,22 @@ def search_store(name):
 
     selection = input_int_validation("Enter number: ")
 
-    return stores[selection + 1]
+    return stores[selection - 1]
 
 
 def verify_employee(employee):
     print("OBS!".center(30, "-"))
     print(
-        f"First name: {employee.employee_first_name}"
+        f"First name: {employee.employee_first_name}\n"
+        f"Last name: {employee.employee_last_name}\n"
+        f"Phone: {employee.employee_phone_nr}\n"
+        f"Email: {employee.employee_email}\n"
+        f"Store: {employee.store.store_name}\n"
     )
 
     selection = input_int_validation("Is the information correct?\n(1). Yes\n(2). No\n")
 
-    return True if selection == 1 else False
+    return selection == 1
 
 
 def add_employee_menu():
@@ -150,8 +184,7 @@ def add_employee_menu():
 
     if verify_employee(employee):
         employee = ec.save_employee(employee_dict)
-        print(
-            f"{employee.employee_first_name} {employee.employee_last_name} is saved and se to work in our store in {store.store_name}")
+        print(f"{employee.employee_first_name} {employee.employee_last_name} is saved and set to work in our store in {store.store_name}")
 
     else:
         print("Save cancelled!".center(30, "-"))
@@ -177,7 +210,6 @@ def employee_menu():
 
         elif selection == 2:
             select_employee_menu()
-            break
 
         elif selection == 3:
             add_employee_menu()
