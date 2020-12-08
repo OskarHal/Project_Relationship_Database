@@ -1,7 +1,6 @@
-from MongoDB.Models.stores import Store
 import MongoDB.Models.orders as mo
 from MongoDB.db import Document, db
-from MongoDB.Models.stores import Store
+import MongoDB.Models.stores as ms
 
 
 class Employee(Document):
@@ -9,7 +8,7 @@ class Employee(Document):
 
     @property
     def store(self):
-        return Store.find(_id=self.store_id).first_or_none()
+        return ms.Store.find(_id=self.store_id).first_or_none()
 
     @property
     def orders(self):
