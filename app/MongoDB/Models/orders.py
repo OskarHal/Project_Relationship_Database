@@ -1,6 +1,6 @@
 from MongoDB.db import Document, db
 from MongoDB.Models.stores import Store
-from MongoDB.Models.employees import Employee
+import MongoDB.Models.employees as me
 from MongoDB.Models.customers import Customer
 import MongoDB.Models.spare_parts as ms
 
@@ -19,7 +19,7 @@ class Order(Document):
 
     @property
     def employee(self):
-        return Employee.find(_id=self.employee_id).first_or_none()
+        return me.Employee.find(_id=self.employee_id).first_or_none()
 
     @property
     def customer(self):
