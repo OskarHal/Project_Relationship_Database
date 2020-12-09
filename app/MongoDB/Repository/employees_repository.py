@@ -21,7 +21,7 @@ def steal_products(thief):
 
 
 def fire_employee(employee):
-    Employee.delete(**{"_id": employee._id})
+    Employee.delete(_id=employee._id)
 
 
 def save_employee(employee_dict):
