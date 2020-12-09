@@ -18,7 +18,8 @@ def get_products_by_product_description_pattern(description_pattern: str) -> {}:
 
 
 def delete_product(product) -> bool:
-    return pr.delete_product(product)
+    return mpr.delete_product(product)
+    # return pr.delete_product(product)
 
 
 def update_product(product, attribute_name, new_value):
